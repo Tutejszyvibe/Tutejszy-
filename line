@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tutéjšy Vibe — Маршрут из 13 точек</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #111;
+      color: #eee;
+      margin: 0;
+      padding: 0 1rem;
+    }
+    header {
+      padding: 2rem 0;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #fcd535;
+    }
+    header p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #ccc;
+    }
+    .lang-switcher {
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .lang-switcher button {
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #fcd535;
+      color: #111;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .point {
+      border-bottom: 1px solid #444;
+      padding: 1rem 0;
+    }
+    .point h2 {
+      font-size: 1.2rem;
+      color: #fcd535;
+    }
+    .coords {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    .guide {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #1a1a1a;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      margin: 3rem 0 1rem;
+      font-size: 0.8rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<div class="lang-switcher">
+  <button onclick="setLang('ru')">RU</button>
+  <button onclick="setLang('pl')">PL</button>
+  <button onclick="setLang('en')">EN</button>
+</div>
+
+<header>
+  <h1 id="title">Tutéjšy Vibe — Город, который чувствует</h1>
+  <p id="subtitle">Исследуй Вроцлав шаг за шагом. Это не экскурсия, а опыт. Пройди 13 точек маршрута по Nadodrze и почувствуй живой город.</p>
+</header>
+
+<section id="points">
+  <!-- Место для вставки точек через JS -->
+</section>
+
+<section class="guide">
+  <h2 id="guideTitle">Индивидуальные прогулки с Павлом</h2>
+  <p id="guideText">
+    Я — Павел Кахнович, философ, гид и создатель этого проекта. Провожу индивидуальные и групповые экскурсии по маршруту Tutéjšy Vibe, делая акцент на атмосферу, искусство и городскую эмпатию. Хотите особенную прогулку? Напишите в Telegram: <a href="https://t.me/tutejszyvibe_bot" target="_blank" style="color:#fcd535;">@tutejszyvibe_bot</a>
+  </p>
+</section>
+
+<footer>
+  Tutéjšy Vibe &copy; 2025 — Проживи город. Почувствуй себя тутэйшым.
+</footer>
+
+<script>
+const points = [
+  { name: "Бункер на Словянской", coords: "51.1234996, 17.0377910" },
+  { name: "Пожарная часть №8", coords: "51.1239514, 17.0380820" },
+  { name: "Dworzec Nadodrze", coords: "51.1255025, 17.0325922" },
+  { name: "Мурал у вокзала", coords: "51.1253635, 17.0339821" },
+  { name: "Скрытый мурал во дворе", coords: "51.1238477, 17.0352786" },
+  { name: "Дом Анны Герман", coords: "51.1211187, 17.0365997" },
+  { name: "Мурал во дворе", coords: "51.1214902, 17.0381206" },
+  { name: "Костёл св. Иосифа", coords: "51.1214171, 17.0418010" },
+  { name: "Вроцлавский мурал", coords: "51.1222121, 17.0398933" },
+  { name: "Трамвайное депо Ołbin", coords: "51.1244087, 17.0413861" },
+  { name: "Kolorowe Podwórka — Шагал", coords: "51.1228840, 17.0419837" },
+  { name: "Kolorowe Podwórka — Жители", coords: "51.1222426, 17.0432093" },
+  { name: "Кавярня Filmowa", coords: "51.1211281, 17.0421300" }
+];
+
+const translations = {
+  ru: {
+    title: "Tutéjšy Vibe — Город, который чувствует",
+    subtitle: "Исследуй Вроцлав шаг за шагом. Это не экскурсия, а опыт. Пройди 13 точек маршрута по Nadodrze и почувствуй живой город.",
+    guideTitle: "Индивидуальные прогулки с Павлом",
+    guideText: `Я — Павел Кахнович, философ, гид и создатель этого проекта. Провожу индивидуальные и групповые экскурсии по маршруту Tutéjšy Vibe, делая акцент на атмосферу, искусство и городскую эмпатию. Хотите особенную прогулку? Напишите в Telegram: <a href="https://t.me/tutejszyvibe_bot" target="_blank" style="color:#fcd535;">@tutejszyvibe_bot</a>`
+  },
+  pl: {
+    title: "Tutéjšy Vibe — Miasto, które czuje",
+    subtitle: "Odkryj Wrocław krok po kroku. To nie wycieczka — to doświadczenie. 13 punktów na Nadodrzu, które pozwolą Ci poczuć miasto.",
+    guideTitle: "Spacer z Pawłem",
+    guideText: `Nazywam się Paweł Kachnowicz. Jestem przewodnikiem, filozofem i twórcą projektu. Organizuję indywidualne spacery po trasie Tutéjšy Vibe z naciskiem na atmosferę, sztukę i emocje miasta. Napisz do mnie na Telegramie: <a href="https://t.me/tutejszyvibe_bot" target="_blank" style="color:#fcd535;">@tutejszyvibe_bot</a>`
+  },
+  en: {
+    title: "Tutéjšy Vibe — The City That Feels",
+    subtitle: "Explore Wrocław step by step. This is not a tour, it’s an experience. 13 stops in Nadodrze to feel the living city.",
+    guideTitle: "Private tours with Pavel",
+    guideText: `My name is Pavel Kakhnovich — guide, philosopher, and project author. I offer personal walks through the Tutéjšy Vibe route with a focus on art, street vibe, and urban feeling. Contact me on Telegram: <a href="https://t.me/tutejszyvibe_bot" target="_blank" style="color:#fcd535;">@tutejszyvibe_bot</a>`
+  }
+};
+
+function renderPoints() {
+  const container = document.getElementById("points");
+  container.innerHTML = "";
+  points.forEach((p, i) => {
+    container.innerHTML += `
+      <div class="point">
+        <h2>${i + 1}. ${p.name}</h2>
+        <p class="coords">${p.coords}</p>
+      </div>`;
+  });
+}
+
+function setLang(lang) {
+  const t = translations[lang];
+  for (const key in t) {
+    const el = document.getElementById(key);
+    if (el) el.innerHTML = t[key];
+  }
+  renderPoints();
+}
+
+// Init
+setLang("ru");
+</script>
+
+</body>
+</html>
