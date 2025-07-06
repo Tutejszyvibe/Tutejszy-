@@ -2,6 +2,242 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Tutéjšy Vibe — Открой настоящий Вроцлав. Не просто экскурсия, а глубокий опыт.</title>
-  ...
+  <title>Tutéjšy Vibe — Город, который чувствует</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #111;
+      color: #f0f0f0;
+      line-height: 1.6;
+    }
+    header {
+      background: url('https://images.unsplash.com/photo-1629853381656-78e2e28c6820?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMnwwfDF8c2VhcmNofDEzfHxuYWRvZHJ6ZSUyMHdyb2NsYXd8ZW58MHx8fHwxNzIwMjgwNDg0fDA&ixlib=rb-4.0.3&q=80&w=1500') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    header * {
+      position: relative;
+      z-index: 2;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: #fcd535;
+      margin-bottom: 1rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      color: #eee;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      background: #fcd535;
+      color: #000;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #e0b82b;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+    .lang-switcher button {
+      margin-left: 5px;
+      padding: 6px 10px;
+      font-weight: bold;
+      border-radius: 5px;
+      border: none;
+      background-color: #fcd535;
+      color: #111;
+      cursor: pointer;
+    }
+    section {
+      padding: 4rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    section h2 {
+      font-family: 'Playfair Display', serif;
+      color: #fcd535;
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .feature {
+      background: #1a1a1a;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .feature h3 {
+      color: #fcd535;
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+    .feature p {
+      font-size: 0.95rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<div class="lang-switcher">
+  <button onclick="setLang('ru')">RU</button>
+  <button onclick="setLang('pl')">PL</button>
+  <button onclick="setLang('en')">EN</button>
+</div>
+
+<header>
+  <h1 id="title">Tutéjšy Vibe</h1>
+  <p id="subtitle">Исследуй аутентичный Вроцлав. Это не экскурсия — это опыт.</p>
+  <a href="#buy" class="btn" id="cta">Окунуться в маршрут</a>
+</header>
+
+<section>
+  <h2 id="aboutTitle">Что такое Tutéjšy Vibe?</h2>
+  <p id="aboutText">Это авторский маршрут по району Nadodrze. Это город, который дышит через граффити, тишину, булочные, стариков на скамейке и студентов с кофе.</p>
+</section>
+
+<section>
+  <h2 id="howTitle">Как это работает</h2>
+  <div class="features">
+    <div class="feature">
+      <h3 id="audioTitle">🎧 Аудио-истории</h3>
+      <p id="audioText">Слушай голос автора и атмосферу района — у каждой точки свой характер.</p>
+    </div>
+    <div class="feature">
+      <h3 id="appTitle">📱 Приложение и карта</h3>
+      <p id="appText">Ты получаешь доступ к маршруту в телефоне или PDF-гайду.</p>
+    </div>
+    <div class="feature">
+      <h3 id="taskTitle">📝 Эссе и задания</h3>
+      <p id="taskText">Задания на внимание, чувства, фото, память. Почувствуй, не просто смотри.</p>
+    </div>
+    <div class="feature">
+      <h3 id="giftTitle">🎁 Подарок</h3>
+      <p id="giftText">В кофейне Filmowa назови пароль “Tutéjšy Vibe” и получи символический подарок.</p>
+    </div>
+  </div>
+</section>
+
+<section id="buy">
+  <h2 id="buyTitle">Готов исследовать?</h2>
+  <p id="buyText">Ты получаешь PDF-гид и ссылку на приложение. Пройди маршрут — почувствуй город по-настоящему.</p>
+  <div style="text-align:center; margin-top:1rem;">
+    <a class="btn" href="https://t.me/tutejszyvibe_bot" id="buyBtn" target="_blank">Купить маршрут</a>
+  </div>
+</section>
+
+<footer>
+  Tutéjšy Vibe &copy; 2025 — Вроцлав, который чувствует.
+</footer>
+
+<script>
+const translations = {
+  ru: {
+    title: "Tutéjšy Vibe",
+    subtitle: "Исследуй аутентичный Вроцлав. Это не экскурсия — это опыт.",
+    cta: "Окунуться в маршрут",
+    aboutTitle: "Что такое Tutéjšy Vibe?",
+    aboutText: "Это авторский маршрут по району Nadodrze. Это город, который дышит через граффити, тишину, булочные, стариков на скамейке и студентов с кофе.",
+    howTitle: "Как это работает",
+    audioTitle: "🎧 Аудио-истории",
+    audioText: "Слушай голос автора и атмосферу района — у каждой точки свой характер.",
+    appTitle: "📱 Приложение и карта",
+    appText: "Ты получаешь доступ к маршруту в телефоне или PDF-гайду.",
+    taskTitle: "📝 Эссе и задания",
+    taskText: "Задания на внимание, чувства, фото, память. Почувствуй, не просто смотри.",
+    giftTitle: "🎁 Подарок",
+    giftText: "В кофейне Filmowa назови пароль “Tutéjšy Vibe” и получи символический подарок.",
+    buyTitle: "Готов исследовать?",
+    buyText: "Ты получаешь PDF-гид и ссылку на приложение.",
+    buyBtn: "Купить маршрут"
+  },
+  pl: {
+    title: "Tutéjšy Vibe",
+    subtitle: "Odkryj autentyczny Wrocław. To nie jest wycieczka — to doświadczenie.",
+    cta: "Rozpocznij trasę",
+    aboutTitle: "Czym jest Tutéjšy Vibe?",
+    aboutText: "Autorska trasa po Nadodrzu. Miasto oddychające przez murale, ciszę i piekarnie.",
+    howTitle: "Jak to działa",
+    audioTitle: "🎧 Historie audio",
+    audioText: "Słuchaj głosu autora i atmosfery każdej lokalizacji.",
+    appTitle: "📱 Aplikacja i mapa",
+    appText: "Dostajesz dostęp do trasy przez telefon lub PDF.",
+    taskTitle: "📝 Eseje i zadania",
+    taskText: "Zadania, pytania, emocje.",
+    giftTitle: "🎁 Prezent",
+    giftText: "W kawiarni Filmowa powiedz hasło 'Tutéjšy Vibe' i odbierz prezent.",
+    buyTitle: "Gotowy na spacer?",
+    buyText: "Otrzymujesz przewodnik PDF i link do aplikacji.",
+    buyBtn: "Kup trasę"
+  },
+  en: {
+    title: "Tutéjšy Vibe",
+    subtitle: "Explore authentic Wrocław. This is not a tour — it’s an experience.",
+    cta: "Start the journey",
+    aboutTitle: "What is Tutéjšy Vibe?",
+    aboutText: "A personal route through Nadodrze. A city breathing through murals and silence.",
+    howTitle: "How it works",
+    audioTitle: "🎧 Audio stories",
+    audioText: "Listen to the guide’s voice and feel each place.",
+    appTitle: "📱 App and map",
+    appText: "Get access via phone or PDF guide.",
+    taskTitle: "📝 Essays and tasks",
+    taskText: "Reflection, observation, emotion.",
+    giftTitle: "🎁 Gift",
+    giftText: "At Filmowa café, say 'Tutéjšy Vibe' and get a surprise.",
+    buyTitle: "Ready to explore?",
+    buyText: "Receive PDF and app access. Walk, feel, reflect.",
+    buyBtn: "Buy the route"
+  }
+};
+
+function setLang(lang) {
+  const t = translations[lang];
+  for (const key in t) {
+    const el = document.getElementById(key);
+    if (el) el.textContent = t[key];
+  }
+}
+</script>
+
+</body>
 </html>
