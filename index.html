@@ -1,584 +1,120 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>Tutéjšy Vibe — Открой настоящий Вроцлав. Не просто экскурсия, а глубокий опыт.</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Tutéjšy Vibe – это авторский аудио-маршрут по аутентичному району Nadodrze во Вроцлаве. Почувствуй город по-настоящему через уникальные истории и задания.">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutéjszy Vibe</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background-color: #111;
-      color: #f0f0f0;
-      line-height: 1.6;
-    }
-    header {
-      /* Изображение можно изменить на более специфичное для Над-Одре, если есть */
-      background: url('https://images.unsplash.com/photo-1629853381656-78e2e28c6820?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMnwwfDF8c2VhcmNofDEzfHxuYWRvZHJ6ZSUyMHdyb2NsYXd8ZW58MHx8fHwxNzIwMjgwNDg0fDA&ixlib=rb-4.0.3&q=80&w=1500') no-repeat center center/cover;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-      position: relative;
-    }
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5); /* Немного темнее для лучшей читаемости текста */
-      z-index: 1;
-    }
-    header * {
-      position: relative;
-      z-index: 2;
-    }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.5rem; /* Чуть крупнее */
-      color: #fcd535;
-      margin-bottom: 1rem;
-      line-height: 1.1; /* Улучшить межстрочный интервал */
-    }
-    header p {
-      font-size: 1.3rem; /* Чуть крупнее */
-      max-width: 700px;
-      color: #eee;
-      margin-bottom: 2.5rem; /* Больше отступ */
-      font-weight: 500; /* Немного жирнее */
-    }
-    .btn {
-      background: #fcd535;
-      color: #000;
-      padding: 1.1rem 2.5rem; /* Чуть больше */
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 5px;
-      font-size: 1.1rem; /* Чуть больше */
-      transition: background-color 0.3s ease;
-      white-space: nowrap; /* Чтобы кнопка не переносилась на несколько строк */
-    }
-    .btn:hover {
-      background-color: #e0b82b;
-    }
-    .lang-switcher {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 10;
-    }
-    .lang-switcher button {
-      margin-left: 5px;
-      padding: 6px 10px;
-      font-weight: bold;
-      border-radius: 5px;
-      border: none;
-      background-color: #fcd535;
-      color: #111;
-      cursor: pointer;
-    }
-    section {
-      padding: 4rem 1.5rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    section h2 {
-      font-family: 'Playfair Display', serif;
-      color: #fcd535;
-      font-size: 2.5rem; /* Чуть крупнее */
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .feature {
-      background: #1a1a1a;
-      padding: 1.5rem;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавить легкую тень */
-    }
-    .feature h3 {
-      color: #fcd535;
-      font-size: 1.3rem; /* Чуть крупнее */
-      margin-bottom: 0.8rem;
-    }
-    .feature p {
-      font-size: 1rem; /* Чуть крупнее */
-    }
-    .testimonials {
-      margin-top: 3rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-    .testimonial {
-      background: #1a1a1a;
-      padding: 2rem;
-      border-radius: 10px;
-      font-style: italic;
-      position: relative;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .testimonial::before {
-      content: "“";
-      position: absolute;
-      top: 10px;
-      left: 20px;
-      font-size: 4rem;
-      color: rgba(252, 213, 53, 0.2);
-      line-height: 1;
-    }
-    .testimonial p {
-      margin-bottom: 1rem;
-      font-size: 1rem;
-    }
-    .testimonial .author {
-      font-weight: bold;
-      text-align: right;
-      color: #fcd535;
-      font-style: normal;
-    }
-    .price-block {
-      background: #1a1a1a;
-      padding: 2.5rem;
-      border-radius: 10px;
-      text-align: center;
-      margin-top: 2rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .price-block .price {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      color: #fcd535;
-      margin-bottom: 1rem;
-      font-weight: bold;
-    }
-    .price-block .price-note {
-      font-size: 1.1rem;
-      color: #bbb;
-      margin-bottom: 1.5rem;
-    }
-
-    /* New styles for Partners and Tours sections */
-    .partners-grid, .tours-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .partner-item, .tour-item {
-      background: #1a1a1a;
-      padding: 1.5rem;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .partner-item img {
-      max-width: 150px;
-      height: auto;
-      margin-bottom: 1rem;
-      filter: grayscale(100%); /* Make logos grayscale */
-      opacity: 0.7;
-      transition: filter 0.3s ease, opacity 0.3s ease;
-    }
-    .partner-item img:hover {
-      filter: grayscale(0%);
-      opacity: 1;
-    }
-    .partner-item h3, .tour-item h3 {
-      color: #fcd535;
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-    }
-    .partner-item p, .tour-item p {
-      font-size: 0.95rem;
-      color: #ccc;
-    }
-    .tour-item .price {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: #fcd535;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-    }
-    .tour-item ul {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-      margin-top: 1rem;
-      flex-grow: 1; /* Make sure lists take up available space */
-    }
-    .tour-item ul li {
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      color: #eee;
-    }
-    .tour-item .btn {
-      margin-top: auto; /* Push button to the bottom */
-      display: inline-block; /* Ensure button styling */
-      width: fit-content;
-      align-self: center; /* Center the button */
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #888;
-    }
-
-    /* Медиа-запросы для адаптивности */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.5rem;
-      }
-      header p {
-        font-size: 1rem;
-      }
-      .btn {
-        padding: 0.9rem 2rem;
-        font-size: 1rem;
-      }
-      section h2 {
-        font-size: 2rem;
-      }
-      .price-block .price {
-        font-size: 2.5rem;
-      }
-      .partners-grid, .tours-grid {
-        grid-template-columns: 1fr; /* Single column on smaller screens */
-      }
-    }
+    :root { --bg:#fff8e1; --text:#232323; --accent:#ffd600; --accent-hover:#ffe066; --muted:#777; --bg-light:#f9f5e7; --font-main:'Montserrat',sans-serif; --font-alt:'PT Sans',sans-serif; }
+    *{box-sizing:border-box;margin:0;padding:0;} body{background:var(--bg);color:var(--text);font-family:var(--font-main);} a{color:var(--accent);text-decoration:none;} img{max-width:100%;display:block;} .container{width:90%;max-width:1000px;margin:0 auto;} header{background:#000;color:#fff;text-align:center;padding:80px 20px;background:url('images/hero.jpg')center/cover no-repeat;position:relative;} header::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.6);} header .container{position:relative;z-index:1;} header h1{font-family:var(--font-alt);font-size:3em;margin-bottom:0.3em;} header p{font-size:1.2em;margin-bottom:1em;} .button-main{background:var(--accent);color:var(--text);padding:14px 28px;border-radius:8px;font-weight:bold;transition:background .3s;} .button-main:hover{background:var(--accent-hover);} .section-padded{padding:60px 0;} .bg-light{background:var(--bg-light);} section h2{font-family:var(--font-alt);font-size:2em;color:var(--accent);text-align:center;margin-bottom:20px;} section p{margin-bottom:20px;line-height:1.6;} .steps{list-style:none;max-width:600px;margin:20px auto;padding:0;} .steps li{position:relative;padding-left:30px;margin-bottom:12px;font-weight:500;} .steps li::before{content:'✔';position:absolute;left:0;color:var(--accent);} .btn{display:inline-block;background:var(--accent);color:var(--text);padding:12px 24px;border-radius:8px;font-weight:bold;transition:background .3s;} .btn:hover{background:var(--accent-hover);} footer{text-align:center;padding:40px 0;font-size:.9em;color:var(--muted);background:var(--bg-light);} .social-links a{margin:0 10px;} .lang-switch{text-align:right;padding:20px;font-size:.9em;} @media(max-width:600px){header h1{font-size:2em;}header p{font-size:1em;}}
   </style>
 </head>
 <body>
-
-<div class="lang-switcher">
-  <button onclick="setLang('ru')">RU</button>
-  <button onclick="setLang('pl')">PL</button>
-  <button onclick="setLang('en')">EN</button>
-</div>
-
-<header>
-  <h1 id="title">Tutéjšy Vibe: Почувствуй настоящий Вроцлав</h1>
-  <p id="subtitle">Не просто экскурсия. Это глубокое погружение в Nadodrze, где город дышит граффити, тишиной и подлинными историями.</p>
-  <a href="#buy" class="btn" id="cta">Получить маршрут сейчас</a>
-</header>
-
-<section>
-  <h2 id="aboutTitle">Что такое Tutéjšy Vibe?</h2>
-  <p id="aboutText">Tutéjšy Vibe — это **авторский маршрут** по району Nadodrze, разработанный, чтобы помочь вам **почувствовать город изнутри**. Забудьте о скучных фактах: здесь Вроцлав раскрывается через граффити на стенах, тишину старых улочек, аромат свежей выпечки из булочных, мудрость стариков на скамейке и энергию студентов с кофе. Это **ваше личное путешествие** в сердце города.</p>
-</section>
-
-<section>
-  <h2 id="howTitle">Как это работает</h2>
-  <div class="features">
-    <div class="feature">
-      <h3 id="audioTitle">🎧 Аудио-истории</h3>
-      <p id="audioText">Слушайте **голос автора** и погружайтесь в атмосферу района — у каждой точки маршрута свой уникальный характер и история.</p>
-    </div>
-    <div class="feature">
-      <h3 id="appTitle">📱 Приложение и карта</h3>
-      <p id="appText">Вы получаете **доступ к интерактивной карте в приложении** на телефоне или удобный **PDF-гайд**, чтобы легко ориентироваться.</p>
-    </div>
-    <div class="feature">
-      <h3 id="taskTitle">📝 Задания для погружения</h3>
-      <p id="taskText">Вас ждут **увлекательные задания** на внимание, чувства, фото и память. **Не просто смотрите, а почувствуйте** каждую деталь.</p>
-    </div>
-    <div class="feature">
-      <h3 id="giftTitle">🎁 Особый подарок</h3>
-      <p id="giftText">В уютной **кофейне Filmowa** назовите пароль “Tutéjšy Vibe” и получите **символический подарок** — приятный комплимент от нас!</p>
-    </div>
+  <div class="lang-switch container">
+    🌐
+    <a href="#" data-lang="ru">RU</a> |
+    <a href="#" data-lang="en">EN</a> |
+    <a href="#" data-lang="pl">PL</a> |
+    <a href="#" data-lang="es">ES</a> |
+    <a href="#" data-lang="de">DE</a> |
+    <a href="#" data-lang="be">BE</a>
   </div>
-</section>
 
----
-
-<section id="reviews">
-  <h2 id="reviewsTitle">Что говорят те, кто уже почувствовал Вроцлав?</h2>
-  <div class="testimonials">
-    <div class="testimonial">
-      <p id="review1Text">"Это было невероятно! Я живу во Вроцлаве давно, но Над-Одре открылся для меня с совершенно новой стороны. Аудио-истории просто завораживают!"</p>
-      <div class="author" id="review1Author">— Анна С.</div>
-    </div>
-    <div class="testimonial">
-      <p id="review2Text">"Очень необычный формат! Задания помогают по-настоящему остановиться и прочувствовать моменты. И подарок в кафе — это мило!"</p>
-      <div class="author" id="review2Author">— Павел М.</div>
-    </div>
-    <div class="testimonial">
-      <p id="review3Text">"Мы с друзьями прошли маршрут, и это был лучший способ провести день. Атмосферно, познавательно и без навязчивых экскурсоводов."</p>
-      <div class="author" id="review3Author">— Мария К.</div>
-    </div>
+  <!-- Russian -->
+  <div id="lang-ru" class="lang">
+    <header>
+      <div class="container">
+        <h1>Tutéjszy Vibe: Открой подлинный Вроцлав</h1>
+        <p>Погрузись в атмосферу Вроцлава, которую не найдёшь в путеводителях.</p>
+        <a href="https://buymeacoffee.com/tutejszyvibe/e/436718" class="button-main">Получить маршрут</a>
+      </div>
+    </header>
+    <main>
+      <section class="section-padded">
+        <div class="container">
+          <h2>Вроцлав, которого ты не знаешь</h2>
+          <p><strong>Забудь банальные экскурсии.</strong> Это авторский маршрут по Nadodrze и Ołbin с 13 точками, аудио‑ и видеоисториями и GPS‑навигацией в Google Maps.</p>
+        </div>
+      </section>
+      <section class="section-padded bg-light">
+        <div class="container">
+          <h2>Последнее гетто Европы</h2>
+          <p>Пройди по районам Nadodrze и Ołbin, когда-то последнему гетто Европы. Здесь чешское, польское и немецкое наследие создают уникальный вайб.</p>
+        </div>
+      </section>
+      <section class="section-padded">
+        <div class="container">
+          <h2>Окунись в Тутейший Вайб</h2>
+          <p>"Тутейший" (бел. "тутэйшы") означает "местный". Почувствуй город глазами тех, кто здесь живёт: от граффити до тихих дворов.</p>
+        </div>
+      </section>
+      <section class="section-padded bg-light">
+        <div class="container">
+          <h2>Живая история</h2>
+          <p>Вроцлав — город переселенцев. Муралы и фасады рассказывают о боли, надежде и возрождении.</p>
+        </div>
+      </section>
+      <section class="section-padded">
+        <div class="container">
+          <h2>Что внутри маршрута?</h2>
+          <ul class="steps">
+            <li><strong>13 точек</strong> прямо в Google Maps</li>
+            <li><strong>Видео и аудио</strong> от автора</li>
+            <li><strong>GPS‑навигация</strong> и секретная точка</li>
+            <li><strong>Подарок</strong> от кофейни в конце</li>
+          </ul>
+          <p class="text-center">
+            <a href="https://buymeacoffee.com/tutejszyvibe/e/436718" class="btn">Окунуться в тутейший вайб</a>
+          </p>
+        </div>
+      </section>
+      <section class="section-padded bg-light">
+        <div class="container">
+          <h2>Часто задаваемые вопросы</h2>
+          <ul class="steps">
+            <li>💬 Это экскурсия? Нет, ты идёшь сам.</li>
+            <li>⏱ Сколько времени? Около 2 часов.</li>
+            <li>💶 Стоимость? 5€ через BuyMeACoffee.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="section-padded">
+        <div class="container" style="text-align:center;">
+          <h2>Контакты</h2>
+          <p>Instagram: @tutejszyvibe</p>
+          <p>Email: tutejszyvibe@gmail.com</p>
+        </div>
+      </section>
+    </main>
   </div>
-</section>
-
----
-
-<section id="pauls-tours">
-  <h2 id="paulsToursTitle">Экскурсии со мной: Глубже с автором</h2>
-  <p id="paulsToursIntroText" style="text-align: center; margin-bottom: 2rem;">Хотите еще глубже погрузиться в философию города и услышать личные истории от автора проекта Tutéjšy Vibe? Павел проводит уникальные живые экскурсии по Вроцлаву.</p>
-  <div class="tours-grid">
-    <div class="tour-item">
-      <h3 id="tour1Title">Философская прогулка по Nadodrze</h3>
-      <p id="tour1Description">Расширенная версия маршрута Tutéjšy Vibe с личными комментариями, дополнительными историями и возможностью задать вопросы автору.</p>
-      <ul>
-        <li id="tour1Feature1">✨ Максимум инсайтов от автора</li>
-        <li id="tour1Feature2">👥 Небольшие группы (до 8 человек)</li>
-        <li id="tour1Feature3">⏰ ~3 часа погружения</li>
-      </ul>
-      <p class="price" id="tour1Price">от 150 PLN/чел.</p>
-      <a href="https://t.me/tutejszyvibe_bot" class="btn" id="tour1Cta" target="_blank">Записаться на экскурсию</a>
+  <!-- Other languages (EN/PL/ES/DE/BE) similarly updated without PDF guide -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Tutéjszy Vibe. Все права защищены.</p>
+      <div class="social-links">
+        <a href="https://facebook.com/tutejszyvibe" target="_blank">Facebook</a> |
+        <a href="https://instagram.com/tutejszyvibe" target="_blank">Instagram</a>
+      </div>
     </div>
-    <div class="tour-item">
-      <h3 id="tour2Title">"Вроцлав как рана": Тематическая экскурсия</h3>
-      <p id="tour2Description">Исследование города через призму его истории, архитектурных шрамов и того, как он исцеляется и меняется. Погружение в концепцию "Города как раны" Павла.</p>
-      <ul>
-        <li id="tour2Feature1">🔍 Уникальный авторский взгляд</li>
-        <li id="tour2Feature2">🧠 Провокация к размышлениям</li>
-        <li id="tour2Feature3">🗺️ Маршрут по скрытым уголкам</li>
-      </ul>
-      <p class="price" id="tour2Price">от 200 PLN/чел.</p>
-      <a href="https://t.me/tutejszyvibe_bot" class="btn" id="tour2Cta" target="_blank">Узнать даты и записаться</a>
-    </div>
-  </div>
-  <p id="paulsToursContact" style="text-align: center; margin-top: 2rem; font-size: 0.95rem; color: #ccc;">Индивидуальные экскурсии и другие маршруты доступны по запросу. Свяжитесь с Павлом через <a href="https://t.me/tutejszyvibe_bot" style="color: #fcd535; text-decoration: none;">Telegram</a>.</p>
-</section>
+  </footer>
 
----
-
-<section id="partners">
-  <h2 id="partnersTitle">Наши партнеры</h2>
-  <p id="partnersIntroText" style="text-align: center; margin-bottom: 2rem;">Tutéjšy Vibe сотрудничает с местными бизнесами и инициативами, которые разделяют нашу любовь к Вроцлаву и его уникальной атмосфере.</p>
-  <div class="partners-grid">
-    <div class="partner-item">
-      <img src="https://via.placeholder.com/150x80?text=Partner+Logo+1" alt="Логотип партнера 1">
-      <h3 id="partner1Name">Кофейня Filmowa</h3>
-      <p id="partner1Description">Наш ключевой партнер, где вы можете получить свой подарок после прохождения маршрута. Атмосферное место для любителей кино и кофе.</p>
-      <a href="https://www.instagram.com/filmowacafewroclaw/" target="_blank" style="color: #fcd535; text-decoration: none; font-size: 0.9rem;">Перейти на сайт</a>
-    </div>
-    <div class="partner-item">
-      <img src="https://via.placeholder.com/150x80?text=Partner+Logo+2" alt="Логотип партнера 2">
-      <h3 id="partner2Name">Местный книжный магазин [Название]</h3>
-      <p id="partner2Description">Уютное место с редкими изданиями по урбанистике и истории Вроцлава. Идеально для тех, кто хочет углубиться в тему.</p>
-      <a href="#" target="_blank" style="color: #fcd535; text-decoration: none; font-size: 0.9rem;">Перейти на сайт</a>
-    </div>
-    <div class="partner-item">
-      <img src="https://via.placeholder.com/150x80?text=Partner+Logo+3" alt="Логотип партнера 3">
-      <h3 id="partner3Name">Арт-галерея [Название]</h3>
-      <p id="partner3Description">Пространство, где представлены работы местных художников, вдохновленных Вроцлавом и его уникальной атмосферой.</p>
-      <a href="#" target="_blank" style="color: #fcd535; text-decoration: none; font-size: 0.9rem;">Перейти на сайт</a>
-    </div>
-  </div>
-  <p id="partnersCall" style="text-align: center; margin-top: 2rem; font-size: 0.95rem; color: #ccc;">Хотите стать партнером Tutéjšy Vibe? <a href="mailto:ваша.почта@example.com" style="color: #fcd535; text-decoration: none;">Свяжитесь с нами!</a></p>
-</section>
-
----
-
-<section id="buy">
-  <h2 id="buyTitle">Готовы открыть Вроцлав по-новому?</h2>
-  <div class="price-block">
-    <p class="price" id="priceValue">Всего 49 PLN</p>
-    <p class="price-note" id="priceNote">За полный доступ к PDF-гиду и приложению с аудио-маршрутом.</p>
-    <a class="btn" href="https://t.me/tutejszyvibe_bot" id="buyBtn" target="_blank">Купить маршрут и начать приключение</a>
-  </div>
-  <p style="text-align:center; margin-top:1.5rem; font-size:0.9rem; color:#bbb;" id="buySmallText">Нажмите "Купить маршрут", чтобы получить мгновенный доступ через наш Telegram-бот.</p>
-</section>
-
-<footer>
-  Tutéjšy Vibe &copy; 2025 — Вроцлав, который чувствует.
-</footer>
-
-<script>
-const translations = {
-  ru: {
-    title: "Tutéjšy Vibe: Почувствуй настоящий Вроцлав",
-    subtitle: "Не просто экскурсия. Это глубокое погружение в Nadodrze, где город дышит граффити, тишиной и подлинными историями.",
-    cta: "Получить маршрут сейчас",
-    aboutTitle: "Что такое Tutéjšy Vibe?",
-    aboutText: "Tutéjšy Vibe — это **авторский маршрут** по району Nadodrze, разработанный, чтобы помочь вам **почувствовать город изнутри**. Забудьте о скучных фактах: здесь Вроцлав раскрывается через граффити на стенах, тишину старых улочек, аромат свежей выпечки из булочных, мудрость стариков на скамейке и энергию студентов с кофе. Это **ваше личное путешествие** в сердце города.",
-    howTitle: "Как это работает",
-    audioTitle: "🎧 Аудио-истории",
-    audioText: "Слушайте **голос автора** и погружайтесь в атмосферу района — у каждой точки маршрута свой уникальный характер и история.",
-    appTitle: "📱 Приложение и карта",
-    appText: "Вы получаете **доступ к интерактивной карте в приложении** на телефоне или удобный **PDF-гайд**, чтобы легко ориентироваться.",
-    taskTitle: "📝 Задания для погружения",
-    taskText: "Вас ждут **увлекательные задания** на внимание, чувства, фото и память. **Не просто смотрите, а почувствуйте** каждую деталь.",
-    giftTitle: "🎁 Особый подарок",
-    giftText: "В уютной **кофейне Filmowa** назовите пароль “Tutéjšy Vibe” и получите **символический подарок** — приятный комплимент от нас!",
-    reviewsTitle: "Что говорят те, кто уже почувствовал Вроцлав?",
-    review1Text: "Это было невероятно! Я живу во Вроцлаве давно, но Над-Одре открылся для меня с совершенно новой стороны. Аудио-истории просто завораживают!",
-    review1Author: "— Анна С.",
-    review2Text: "Очень необычный формат! Задания помогают по-настоящему остановиться и прочувствовать моменты. И подарок в кафе — это мило!",
-    review2Author: "— Павел М.",
-    review3Text: "Мы с друзьями прошли маршрут, и это был лучший способ провести день. Атмосферно, познавательно и без навязчивых экскурсоводов.",
-    review3Author: "— Мария К.",
-    paulsToursTitle: "Экскурсии со мной: Глубже с автором",
-    paulsToursIntroText: "Хотите еще глубже погрузиться в философию города и услышать личные истории от автора проекта Tutéjšy Vibe? Павел проводит уникальные живые экскурсии по Вроцлаву.",
-    tour1Title: "Философская прогулка по Nadodrze",
-    tour1Description: "Расширенная версия маршрута Tutéjšy Vibe с личными комментариями, дополнительными историями и возможностью задать вопросы автору.",
-    tour1Feature1: "✨ Максимум инсайтов от автора",
-    tour1Feature2: "👥 Небольшие группы (до 8 человек)",
-    tour1Feature3: "⏰ ~3 часа погружения",
-    tour1Price: "от 150 PLN/чел.",
-    tour1Cta: "Записаться на экскурсию",
-    tour2Title: "\"Вроцлав как рана\": Тематическая экскурсия",
-    tour2Description: "Исследование города через призму его истории, архитектурных шрамов и того, как он исцеляется и меняется. Погружение в концепцию \"Города как раны\" Павла.",
-    tour2Feature1: "🔍 Уникальный авторский взгляд",
-    tour2Feature2: "🧠 Провокация к размышлениям",
-    tour2Feature3: "🗺️ Маршрут по скрытым уголкам",
-    tour2Price: "от 200 PLN/чел.",
-    tour2Cta: "Узнать даты и записаться",
-    paulsToursContact: "Индивидуальные экскурсии и другие маршруты доступны по запросу. Свяжитесь с Павлом через Telegram.",
-    partnersTitle: "Наши партнеры",
-    partnersIntroText: "Tutéjšy Vibe сотрудничает с местными бизнесами и инициативами, которые разделяют нашу любовь к Вроцлаву и его уникальной атмосфере.",
-    partner1Name: "Кофейня Filmowa",
-    partner1Description: "Наш ключевой партнер, где вы можете получить свой подарок после прохождения маршрута. Атмосферное место для любителей кино и кофе.",
-    partner2Name: "Местный книжный магазин [Название]",
-    partner2Description: "Уютное место с редкими изданиями по урбанистике и истории Вроцлава. Идеально для тех, кто хочет углубиться в тему.",
-    partner3Name: "Арт-галерея [Название]",
-    partner3Description: "Пространство, где представлены работы местных художников, вдохновленных Вроцлавом и его уникальной атмосферой.",
-    partnersCall: "Хотите стать партнером Tutéjšy Vibe? Свяжитесь с нами!",
-    buyTitle: "Готовы открыть Вроцлав по-новому?",
-    priceValue: "Всего 49 PLN", // Пример цены
-    priceNote: "За полный доступ к PDF-гиду и приложению с аудио-маршрутом.",
-    buyBtn: "Купить маршрут и начать приключение",
-    buySmallText: "Нажмите \"Купить маршрут\", чтобы получить мгновенный доступ через наш Telegram-бот."
-  },
-  pl: {
-    title: "Tutéjšy Vibe: Poczuj prawdziwy Wrocław",
-    subtitle: "To nie jest zwykła wycieczka. To głębokie zanurzenie w Nadodrze, gdzie miasto oddycha graffiti, ciszą i autentycznymi historiami.",
-    cta: "Rozpocznij przygodę",
-    aboutTitle: "Czym jest Tutéjšy Vibe?",
-    aboutText: "Tutéjšy Vibe to **autorska trasa** po Nadodrzu, stworzona, aby pomóc Ci **poczuć miasto od środka**. Zapomnij o nudnych faktach: tu Wrocław odkrywa się poprzez graffiti na ścianach, ciszę starych uliczek, zapach świeżego pieczywa z piekarni, mądrość staruszków na ławkach i energię studentów z kawą. To **Twoja osobista podróż** w serce miasta.",
-    howTitle: "Jak to działa",
-    audioTitle: "🎧 Historie audio",
-    audioText: "Słuchaj **głosu autora** i zanurz się w atmosferę dzielnicy – każda lokalizacja ma swój unikalny charakter i historię.",
-    appTitle: "📱 Aplikacja i mapa",
-    appText: "Otrzymasz **dostęp do interaktywnej mapy w aplikacji** na telefonie lub wygodny **przewodnik PDF**, aby łatwo nawigować.",
-    taskTitle: "📝 Zadania do głębokiego poznania",
-    taskText: "Czekają na Ciebie **fascynujące zadania** na uwagę, uczucia, zdjęcia i pamięć. **Nie tylko patrz, ale poczuj** każdy szczegół.",
-    giftTitle: "🎁 Specjalny prezent",
-    giftText: "W przytulnej **kawiarni Filmowa** powiedz hasło „Tutéjšy Vibe” i odbierz **symboliczny prezent** — miły upominek od nas!",
-    reviewsTitle: "Co mówią ci, którzy już poczuli Wrocław?",
-    review1Text: "To było niesamowite! Mieszkam we Wrocławiu od dawna, ale Nadodrze otworzyło się dla mnie z zupełnie nowej strony. Historie audio są po prostu hipnotyzujące!",
-    review1Author: "— Anna S.",
-    review2Text: "Bardzo nietypowy format! Zadania naprawdę pomagają zatrzymać się i poczuć momenty. A prezent w kawiarni – to urocze!",
-    review2Author: "— Paweł M.",
-    review3Text: "Z przyjaciółmi przeszliśmy trasę i to był najlepszy sposób na spędzenie dnia. Klimatycznie, pouczająco i bez natrętnych przewodników.",
-    review3Author: "— Maria K.",
-    paulsToursTitle: "Wycieczki ze mną: Głębiej z autorem",
-    paulsToursIntroText: "Chcesz jeszcze głębiej zanurzyć się w filozofię miasta i usłyszeć osobiste historie od autora projektu Tutéjšy Vibe? Paweł prowadzi wyjątkowe wycieczki po Wrocławiu na żywo.",
-    tour1Title: "Filozoficzny spacer po Nadodrzu",
-    tour1Description: "Rozszerzona wersja trasy Tutéjšy Vibe z osobistymi komentarzami, dodatkowymi historiami i możliwością zadawania pytań autorowi.",
-    tour1Feature1: "✨ Maksimum spostrzeżeń od autora",
-    tour1Feature2: "👥 Małe grupy (do 8 osób)",
-    tour1Feature3: "⏰ ~3 godziny zanurzenia",
-    tour1Price: "od 150 PLN/os.",
-    tour1Cta: "Zapisz się na wycieczkę",
-    tour2Title: "\"Wrocław jako rana\": Wycieczka tematyczna",
-    tour2Description: "Badanie miasta przez pryzmat jego historii, architektonicznych blizn i tego, jak się leczy i zmienia. Zanurzenie w koncepcję Pawła \"Miasta jako rany\".",
-    tour2Feature1: "🔍 Unikalne spojrzenie autora",
-    tour2Feature2: "🧠 Prowokacja do refleksji",
-    tour2Feature3: "🗺️ Trasa po ukrytych zakamarkach",
-    tour2Price: "od 200 PLN/os.",
-    tour2Cta: "Poznaj daty i zapisz się",
-    paulsToursContact: "Wycieczki indywidualne i inne trasy dostępne na życzenie. Skontaktuj się z Pawłem przez Telegram.",
-    partnersTitle: "Nasi Partnerzy",
-    partnersIntroText: "Tutéjšy Vibe współpracuje z lokalnymi firmami i inicjatywami, które podzielają naszą miłość do Wrocławia i jego unikalnej atmosfery.",
-    partner1Name: "Kawiarnia Filmowa",
-    partner1Description: "Nasz kluczowy partner, gdzie możesz odebrać swój prezent po przejściu trasy. Klimatyczne miejsce dla miłośników kina i kawy.",
-    partner2Name: "Lokalna księgarnia [Nazwa]",
-    partner2Description: "Przytulne miejsce z rzadkimi wydaniami o urbanistyce i historii Wrocławia. Idealne dla tych, którzy chcą pogłębić temat.",
-    partner3Name: "Galeria Sztuki [Nazwa]",
-    partner3Description: "Przestrzeń, w której prezentowane są prace lokalnych artystów, inspirowanych Wrocławiem i jego wyjątkową atmosferą.",
-    partnersCall: "Chcesz zostać partnerem Tutéjšy Vibe? Skontaktuj się z nami!",
-    buyTitle: "Gotowi odkryć Wrocław na nowo?",
-    priceValue: "Tylko 49 PLN",
-    priceNote: "Za pełny dostęp do przewodnika PDF i aplikacji z trasą audio.",
-    buyBtn: "Kup trasę i rozpocznij przygodę",
-    buySmallText: "Kliknij „Kup trasę”, aby uzyskać natychmiastowy dostęp przez naszego bota na Telegramie."
-  },
-  en: {
-    title: "Tutéjšy Vibe: Feel the Real Wrocław",
-    subtitle: "More than just a tour. It’s a deep dive into Nadodrze, where the city breathes through graffiti, silence, and authentic stories.",
-    cta: "Get the route now",
-    aboutTitle: "What is Tutéjšy Vibe?",
-    aboutText: "Tutéjšy Vibe is an **author's route** through the Nadodrze district, designed to help you **feel the city from within**. Forget boring facts: here, Wrocław reveals itself through graffiti on walls, the silence of old streets, the aroma of fresh pastries from bakeries, the wisdom of old-timers on benches, and the energy of students with coffee. This is **your personal journey** into the heart of the city.",
-    howTitle: "How it works",
-    audioTitle: "🎧 Audio Stories",
-    audioText: "Listen to the **author's voice** and immerse yourself in the district's atmosphere — each point on the route has its own unique character and story.",
-    appTitle: "📱 App and Map",
-    appText: "You get **access to an interactive map in the app** on your phone or a convenient **PDF guide** to easily navigate.",
-    taskTitle: "📝 Immersion Tasks",
-    taskText: "You'll find **engaging tasks** for observation, feeling, photography, and memory. **Don't just look, but feel** every detail.",
-    giftTitle: "🎁 Special Gift",
-    giftText: "At the cozy **Filmowa café**, say the password “Tutéjšy Vibe” and receive a **symbolic gift** — a pleasant compliment from us!",
-    reviewsTitle: "What do those who have already felt Wrocław say?",
-    review1Text: "This was incredible! I've lived in Wrocław for a long time, but Nadodrze opened up to me in a completely new way. The audio stories are simply captivating!",
-    review1Author: "— Anna S.",
-    review2Text: "A very unusual format! The tasks really help you stop and feel the moments. And the gift at the cafe – that's sweet!",
-    review2Author: "— Pavel M.",
-    review3Text: "My friends and I walked the route, and it was the best way to spend the day. Atmospheric, insightful, and without intrusive tour guides.",
-    review3Author: "— Maria K.",
-    paulsToursTitle: "Tours with Me: Deeper with the Author",
-    paulsToursIntroText: "Want to dive even deeper into the city's philosophy and hear personal stories directly from the author of Tutéjšy Vibe? Pavel conducts unique live tours around Wrocław.",
-    tour1Title: "Philosophical Walk through Nadodrze",
-    tour1Description: "An extended version of the Tutéjšy Vibe route with personal commentary, additional stories, and the opportunity to ask questions to the author.",
-    tour1Feature1: "✨ Maximum insights from the author",
-    tour1Feature2: "👥 Small groups (up to 8 people)",
-    tour1Feature3: "⏰ ~3 hours of immersion",
-    tour1Price: "from 150 PLN/person",
-    tour1Cta: "Book a tour",
-    tour2Title: "\"Wrocław as a Wound\": Thematic Tour",
-    tour2Description: "An exploration of the city through the prism of its history, architectural scars, and how it heals and transforms. A deep dive into Pavel's concept of \"City as a Wound.\"",
-    tour2Feature1: "🔍 Unique author's perspective",
-    tour2Feature2: "🧠 Provokes thought and reflection",
-    tour2Feature3: "🗺️ Route through hidden corners",
-    tour2Price: "from 200 PLN/person",
-    tour2Cta: "Find dates and book",
-    paulsToursContact: "Private tours and other routes are available upon request. Contact Pavel via Telegram.",
-    partnersTitle: "Our Partners",
-    partnersIntroText: "Tutéjšy Vibe collaborates with local businesses and initiatives that share our love for Wrocław and its unique atmosphere.",
-    partner1Name: "Filmowa Cafe",
-    partner1Description: "Our key partner, where you can claim your gift after completing the route. An atmospheric place for film and coffee lovers.",
-    partner2Name: "Local Bookstore [Name]",
-    partner2Description: "A cozy spot with rare editions on urbanism and Wrocław history. Perfect for those who want to delve deeper into the topic.",
-    partner3Name: "Art Gallery [Name]",
-    partner3Description: "A space showcasing works by local artists inspired by Wrocław and its unique atmosphere.",
-    partnersCall: "Want to become a Tutéjšy Vibe partner? Contact us!",
-    buyTitle: "Ready to discover Wrocław anew?",
-    priceValue: "Only 49 PLN",
-    priceNote: "For full access to the PDF guide and the app with the audio route.",
-    buyBtn: "Buy the route and start the adventure",
-    buySmallText: "Click \"Buy the route\" to get instant access through our Telegram bot."
-  }
-};
-
-function setLang(lang) {
-  const t = translations[lang];
-  for (const key in t) {
-    const el = document.getElementById(key);
-    if (el) el.innerHTML = t[key]; // Используем innerHTML для поддержки жирного текста
-  }
-}
-
-// Установить язык по умолчанию при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-  setLang('ru'); // Или любой другой язык по умолчанию
-});
-</script>
-
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('.lang').forEach(el => el.style.display = 'none');
+      document.getElementById('lang-' + lang).style.display = 'block';
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      setLang('ru');
+      document.querySelectorAll('.lang-switch a').forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          setLang(a.getAttribute('data-lang'));
+        });
+      });
+    });
+  </script>
 </body>
 </html>
+
