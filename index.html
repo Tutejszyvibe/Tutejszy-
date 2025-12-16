@@ -1,120 +1,222 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutéjszy Vibe</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tutéjšy Vibe</title>
+  <meta name="description" content="Tutéjšy Vibe — прогулки, приложение и культурный проект во Вроцлаве." />
+  <meta name="theme-color" content="#0b0b0b" />
+
   <style>
-    :root { --bg:#fff8e1; --text:#232323; --accent:#ffd600; --accent-hover:#ffe066; --muted:#777; --bg-light:#f9f5e7; --font-main:'Montserrat',sans-serif; --font-alt:'PT Sans',sans-serif; }
-    *{box-sizing:border-box;margin:0;padding:0;} body{background:var(--bg);color:var(--text);font-family:var(--font-main);} a{color:var(--accent);text-decoration:none;} img{max-width:100%;display:block;} .container{width:90%;max-width:1000px;margin:0 auto;} header{background:#000;color:#fff;text-align:center;padding:80px 20px;background:url('images/hero.jpg')center/cover no-repeat;position:relative;} header::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.6);} header .container{position:relative;z-index:1;} header h1{font-family:var(--font-alt);font-size:3em;margin-bottom:0.3em;} header p{font-size:1.2em;margin-bottom:1em;} .button-main{background:var(--accent);color:var(--text);padding:14px 28px;border-radius:8px;font-weight:bold;transition:background .3s;} .button-main:hover{background:var(--accent-hover);} .section-padded{padding:60px 0;} .bg-light{background:var(--bg-light);} section h2{font-family:var(--font-alt);font-size:2em;color:var(--accent);text-align:center;margin-bottom:20px;} section p{margin-bottom:20px;line-height:1.6;} .steps{list-style:none;max-width:600px;margin:20px auto;padding:0;} .steps li{position:relative;padding-left:30px;margin-bottom:12px;font-weight:500;} .steps li::before{content:'✔';position:absolute;left:0;color:var(--accent);} .btn{display:inline-block;background:var(--accent);color:var(--text);padding:12px 24px;border-radius:8px;font-weight:bold;transition:background .3s;} .btn:hover{background:var(--accent-hover);} footer{text-align:center;padding:40px 0;font-size:.9em;color:var(--muted);background:var(--bg-light);} .social-links a{margin:0 10px;} .lang-switch{text-align:right;padding:20px;font-size:.9em;} @media(max-width:600px){header h1{font-size:2em;}header p{font-size:1em;}}
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #0b0b0b;
+      color: #ffffff;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+    }
+
+    .lang {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .lang button {
+      background: transparent;
+      color: #aaa;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .lang button.active {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin: 0 0 6px;
+      letter-spacing: 0.06em;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #b7b7b7;
+      margin-bottom: 28px;
+    }
+
+    .buttons {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .button {
+      padding: 16px;
+      border-radius: 14px;
+      text-align: center;
+      font-size: 16px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.05);
+    }
+
+    .button span {
+      display: block;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 4px;
+    }
+
+    .button.primary {
+      background: #ffffff;
+      color: #0b0b0b;
+      border: none;
+    }
+
+    .section {
+      border-top: 1px solid rgba(255,255,255,.15);
+      padding-top: 22px;
+      margin-top: 22px;
+    }
+
+    .section h2 {
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #cccccc;
+    }
+
+    .contact {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.6;
+    }
   </style>
 </head>
-<body>
-  <div class="lang-switch container">
-    🌐
-    <a href="#" data-lang="ru">RU</a> |
-    <a href="#" data-lang="en">EN</a> |
-    <a href="#" data-lang="pl">PL</a> |
-    <a href="#" data-lang="es">ES</a> |
-    <a href="#" data-lang="de">DE</a> |
-    <a href="#" data-lang="be">BE</a>
-  </div>
 
-  <!-- Russian -->
-  <div id="lang-ru" class="lang">
-    <header>
-      <div class="container">
-        <h1>Tutéjszy Vibe: Открой подлинный Вроцлав</h1>
-        <p>Погрузись в атмосферу Вроцлава, которую не найдёшь в путеводителях.</p>
-        <a href="https://buymeacoffee.com/tutejszyvibe/e/436718" class="button-main">Получить маршрут</a>
-      </div>
-    </header>
-    <main>
-      <section class="section-padded">
-        <div class="container">
-          <h2>Вроцлав, которого ты не знаешь</h2>
-          <p><strong>Забудь банальные экскурсии.</strong> Это авторский маршрут по Nadodrze и Ołbin с 13 точками, аудио‑ и видеоисториями и GPS‑навигацией в Google Maps.</p>
-        </div>
-      </section>
-      <section class="section-padded bg-light">
-        <div class="container">
-          <h2>Последнее гетто Европы</h2>
-          <p>Пройди по районам Nadodrze и Ołbin, когда-то последнему гетто Европы. Здесь чешское, польское и немецкое наследие создают уникальный вайб.</p>
-        </div>
-      </section>
-      <section class="section-padded">
-        <div class="container">
-          <h2>Окунись в Тутейший Вайб</h2>
-          <p>"Тутейший" (бел. "тутэйшы") означает "местный". Почувствуй город глазами тех, кто здесь живёт: от граффити до тихих дворов.</p>
-        </div>
-      </section>
-      <section class="section-padded bg-light">
-        <div class="container">
-          <h2>Живая история</h2>
-          <p>Вроцлав — город переселенцев. Муралы и фасады рассказывают о боли, надежде и возрождении.</p>
-        </div>
-      </section>
-      <section class="section-padded">
-        <div class="container">
-          <h2>Что внутри маршрута?</h2>
-          <ul class="steps">
-            <li><strong>13 точек</strong> прямо в Google Maps</li>
-            <li><strong>Видео и аудио</strong> от автора</li>
-            <li><strong>GPS‑навигация</strong> и секретная точка</li>
-            <li><strong>Подарок</strong> от кофейни в конце</li>
-          </ul>
-          <p class="text-center">
-            <a href="https://buymeacoffee.com/tutejszyvibe/e/436718" class="btn">Окунуться в тутейший вайб</a>
-          </p>
-        </div>
-      </section>
-      <section class="section-padded bg-light">
-        <div class="container">
-          <h2>Часто задаваемые вопросы</h2>
-          <ul class="steps">
-            <li>💬 Это экскурсия? Нет, ты идёшь сам.</li>
-            <li>⏱ Сколько времени? Около 2 часов.</li>
-            <li>💶 Стоимость? 5€ через BuyMeACoffee.</li>
-          </ul>
-        </div>
-      </section>
-      <section class="section-padded">
-        <div class="container" style="text-align:center;">
-          <h2>Контакты</h2>
-          <p>Instagram: @tutejszyvibe</p>
-          <p>Email: tutejszyvibe@gmail.com</p>
-        </div>
-      </section>
-    </main>
-  </div>
-  <!-- Other languages (EN/PL/ES/DE/BE) similarly updated without PDF guide -->
-  <footer>
-    <div class="container">
-      <p>© 2025 Tutéjszy Vibe. Все права защищены.</p>
-      <div class="social-links">
-        <a href="https://facebook.com/tutejszyvibe" target="_blank">Facebook</a> |
-        <a href="https://instagram.com/tutejszyvibe" target="_blank">Instagram</a>
+<body>
+  <div class="wrap">
+
+    <!-- Language switch -->
+    <div class="lang">
+      <button class="active" data-lang="ru">RU</button>
+      <button data-lang="pl">PL</button>
+      <button data-lang="en">EN</button>
+    </div>
+
+    <!-- Hero -->
+    <h1>Tutéjšy Vibe</h1>
+    <div class="subtitle" id="subtitle">
+      Тутейший вайб · Nadodrze – Ołbin · Wrocław
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <a class="button primary" href="https://tutejszyvibe.glide.page" id="b1">
+        Прогулки · приложение
+        <span>Telegram · Email</span>
+      </a>
+
+      <a class="button" href="https://www.instagram.com/tutejszyvibe/" id="b2">
+        Instagram · вайб проекта
+        <span>@tutejszyvibe · Telegram</span>
+      </a>
+
+      <a class="button" href="https://t.me/hlbtyr" id="b3">
+        Связаться напрямую
+        <span>Telegram · tutejszyvibe@gmail.com</span>
+      </a>
+    </div>
+
+    <!-- About -->
+    <div class="section">
+      <h2 id="aboutTitle">О проекте</h2>
+      <p id="aboutText">
+        Tutéjšy Vibe — авторский проект о городе, которого не показывают в путеводителях.
+        Прогулки по Nadodrze и Ołbin, мобильное приложение и выставочный формат соединяют
+        историю, улицу и личный опыт.
+      </p>
+    </div>
+
+    <!-- Contacts -->
+    <div class="section">
+      <h2 id="contactTitle">Контакты</h2>
+      <div class="contact">
+        Telegram: <a href="https://t.me/hlbtyr">@hlbtyr</a><br/>
+        Email: <a href="mailto:tutejszyvibe@gmail.com">tutejszyvibe@gmail.com</a><br/>
+        Instagram: <a href="https://www.instagram.com/tutejszyvibe/">@tutejszyvibe</a>
       </div>
     </div>
-  </footer>
+
+  </div>
 
   <script>
+    const T = {
+      ru: {
+        subtitle: "Тутейший вайб · Nadodrze – Ołbin · Wrocław",
+        b1: "Прогулки · приложение",
+        b2: "Instagram · вайб проекта",
+        b3: "Связаться напрямую",
+        aboutTitle: "О проекте",
+        aboutText: "Tutéjšy Vibe — авторский проект о городе, которого не показывают в путеводителях. Прогулки по Nadodrze и Ołbin, мобильное приложение и выставочный формат соединяют историю, улицу и личный опыт.",
+        contactTitle: "Контакты"
+      },
+      pl: {
+        subtitle: "Tutajšy vibe · Nadodrze – Ołbin · Wrocław",
+        b1: "Spacery · aplikacja",
+        b2: "Instagram · klimat projektu",
+        b3: "Kontakt bezpośredni",
+        aboutTitle: "O projekcie",
+        aboutText: "Tutéjšy Vibe to autorski projekt o mieście niewidocznym w przewodnikach. Spacery po Nadodrze i Ołbinie, aplikacja mobilna oraz forma wystawowa łączą historię, ulicę i osobiste doświadczenie.",
+        contactTitle: "Kontakt"
+      },
+      en: {
+        subtitle: "Local vibe · Nadodrze – Ołbin · Wrocław",
+        b1: "Walks · app",
+        b2: "Instagram · project vibe",
+        b3: "Contact directly",
+        aboutTitle: "About the project",
+        aboutText: "Tutéjšy Vibe is an author’s project about a city you won’t find in guidebooks. Walks through Nadodrze and Ołbin, a mobile app, and an exhibition format connect history, street life, and personal experience.",
+        contactTitle: "Contact"
+      }
+    };
+
     function setLang(lang) {
-      document.querySelectorAll('.lang').forEach(el => el.style.display = 'none');
-      document.getElementById('lang-' + lang).style.display = 'block';
+      document.getElementById("subtitle").textContent = T[lang].subtitle;
+      document.getElementById("b1").childNodes[0].nodeValue = T[lang].b1;
+      document.getElementById("b2").childNodes[0].nodeValue = T[lang].b2;
+      document.getElementById("b3").childNodes[0].nodeValue = T[lang].b3;
+      document.getElementById("aboutTitle").textContent = T[lang].aboutTitle;
+      document.getElementById("aboutText").textContent = T[lang].aboutText;
+      document.getElementById("contactTitle").textContent = T[lang].contactTitle;
+
+      document.querySelectorAll(".lang button").forEach(b =>
+        b.classList.toggle("active", b.dataset.lang === lang)
+      );
     }
-    document.addEventListener('DOMContentLoaded', () => {
-      setLang('ru');
-      document.querySelectorAll('.lang-switch a').forEach(a => {
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          setLang(a.getAttribute('data-lang'));
-        });
-      });
+
+    document.querySelectorAll(".lang button").forEach(btn => {
+      btn.addEventListener("click", () => setLang(btn.dataset.lang));
     });
   </script>
+
 </body>
 </html>
-
