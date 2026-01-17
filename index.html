@@ -1,197 +1,384 @@
 <!doctype html>
-<html lang="isv">
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tutéjšy Vibe</title>
-  <meta name="description" content="Tutéjšy Vibe — прогулки, приложение, выставка, плакаты и NFT-архив города." />
-  <meta name="theme-color" content="#0b0b10" />
+  <meta name="description" content="Tutéjšy Vibe — прогулки, приложение, выставка и NFT-архив города." />
+  <meta name="theme-color" content="#0b0b0b" />
 
   <style>
-    :root{
-      --bg:#0b0b10;
-      --card:#10101a;
-      --card2:#0f0f17;
-      --text:#ffffff;
-      --muted:#b7b7c7;
-      --muted2:#9a9ab0;
-      --line:rgba(255,255,255,.12);
-      --glow:rgba(138,92,255,.35);
-      --accent:#8a5cff;   /* violet */
-      --accent2:#37d6b5;  /* mint */
-      --accent3:#ffcc66;  /* amber */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #0b0b0b;
+      color: #ffffff;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
     }
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(900px 600px at 20% 10%, rgba(138,92,255,.18), transparent 55%),
-        radial-gradient(900px 600px at 90% 30%, rgba(55,214,181,.12), transparent 55%),
-        radial-gradient(900px 600px at 50% 90%, rgba(255,204,102,.08), transparent 60%),
-        var(--bg);
-      color:var(--text);
-      min-height:100vh;
-    }
-    a{color:inherit;text-decoration:none}
-
-    .wrap{
-      max-width:460px;
-      margin:0 auto;
-      padding:26px 18px 42px;
+    .lang {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px;
     }
 
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:14px;
+    .lang button {
+      background: transparent;
+      color: #aaa;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
     }
 
-    .brand-dot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 18px var(--glow);
-      flex:0 0 auto;
+    .lang button.active {
+      color: #fff;
+      border-color: #fff;
     }
 
-    .lang{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      gap:8px;
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin: 0 0 6px;
+      letter-spacing: 0.06em;
     }
 
-    .lang button{
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.78);
-      border-radius:999px;
-      padding:7px 10px;
-      font-size:12px;
-      cursor:pointer;
-      transition:.18s ease;
-      box-shadow: 0 0 0 rgba(0,0,0,0);
-    }
-    .lang button:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.32);
-    }
-    .lang button.active{
-      background: linear-gradient(135deg, rgba(138,92,255,.95), rgba(55,214,181,.80));
-      border-color: transparent;
-      color: #0b0b10;
-      box-shadow: 0 10px 28px rgba(138,92,255,.20);
-      font-weight: 700;
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #b7b7b7;
+      margin-bottom: 10px;
     }
 
-    h1{
-      margin:10px 0 6px;
-      text-align:center;
-      font-size:28px;
-      letter-spacing:.06em;
+    .tagline {
+      text-align: center;
+      font-size: 12px;
+      color: #9a9a9a;
+      margin-bottom: 28px;
+      line-height: 1.5;
     }
 
-    .subtitle{
-      text-align:center;
-      font-size:13px;
-      color:var(--muted);
-      margin-bottom:8px;
-    }
-    .tagline{
-      text-align:center;
-      font-size:12px;
-      color:var(--muted2);
-      line-height:1.5;
-      margin-bottom:22px;
+    .buttons {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 34px;
     }
 
-    .buttons{display:grid;gap:12px;margin-bottom:22px;}
-
-    .button{
-      padding:16px 16px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.14);
+    .button {
+      padding: 16px;
+      border-radius: 14px;
+      text-align: center;
+      font-size: 16px;
+      border: 1px solid rgba(255,255,255,.15);
       background: rgba(255,255,255,.05);
-      text-align:center;
-      transition:.18s ease;
-      box-shadow: 0 10px 30px rgba(0,0,0,.22);
-    }
-    .button:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.26);}
-    .button .t{display:block;font-size:16px;font-weight:700;}
-    .button .s{display:block;font-size:12px;color:rgba(255,255,255,.70);margin-top:4px;line-height:1.35;}
-
-    .button.primary{
-      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.82));
-      border-color: transparent;
-      color:#0b0b10;
-    }
-    .button.primary .s{color: rgba(11,11,16,.72);}
-
-    .button.accent{
-      background: linear-gradient(135deg, rgba(138,92,255,.22), rgba(55,214,181,.12));
-      border-color: rgba(138,92,255,.35);
     }
 
-    .section{
-      margin-top:18px;
-      padding-top:18px;
-      border-top:1px solid var(--line);
+    .button span.sub {
+      display: block;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 4px;
     }
-    .section h2{
-      margin:0 0 10px;
-      font-size:14px;
-      letter-spacing:.02em;
-      color: rgba(255,255,255,.92);
-    }
-    .section p, .section li{
-      font-size:14px;
-      line-height:1.6;
-      color: rgba(255,255,255,.75);
-    }
-    ul{margin:10px 0 0; padding-left:18px;}
 
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
-    .chip{
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      font-size:12px;
-      color: rgba(255,255,255,.72);
+    .button.primary {
+      background: #ffffff;
+      color: #0b0b0b;
+      border: none;
     }
-    .foot{
-      margin-top:18px;
-      font-size:12px;
-      color: rgba(255,255,255,.55);
-      line-height:1.6;
+
+    .button.ghost {
+      background: rgba(255,255,255,.03);
     }
-    .contact a{border-bottom:1px dashed rgba(255,255,255,.35)}
+
+    .section {
+      border-top: 1px solid rgba(255,255,255,.15);
+      padding-top: 22px;
+      margin-top: 22px;
+    }
+
+    .section h2 {
+      font-size: 15px;
+      margin: 0 0 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .section p, .section li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #cccccc;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 10px 0 0;
+    }
+
+    .contact {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    .pill {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.05);
+      font-size: 12px;
+      color: #cfcfcf;
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: #9a9a9a;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
 
-    <div class="top">
-      <div class="brand-dot" aria-hidden="true"></div>
+    <!-- Language switch -->
+    <div class="lang" role="tablist" aria-label="Language">
+      <button class="active" data-lang="ru" aria-pressed="true">RU</button>
+      <button data-lang="pl" aria-pressed="false">PL</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
 
-      <!-- Language switch (order as requested) -->
-      <div class="lang" aria-label="Language">
-        <button class="active" data-lang="isv">ISV</button>
-        <button data-lang="be">BE</button>
-        <button data-lang="pl">PL</button>
-        <button data-lang="en">EN</button>
-        <button data-lang="it">IT</button>
-        <button data-lang="es">ES</button>
-        <button data-lang="de">DE</button>
+    <!-- Hero -->
+    <h1>Tutéjšy Vibe</h1>
+    <div class="subtitle" data-i18n="subtitle">
+      Тутейший вайб · Nadodrze – Ołbin · Wrocław
+    </div>
+    <div class="tagline" data-i18n="tagline">
+      Прогулки · приложение · выставка · NFT-архив города
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <a class="button primary" href="https://tutejszyvibe.glide.page" id="appLink">
+        <span data-i18n="b1">Прогулки · приложение</span>
+        <span class="sub" data-i18n="b1sub">Маршруты · скидки партнёров · обновления</span>
+      </a>
+
+      <a class="button" href="#" id="nftLink">
+        <span data-i18n="b4">NFT Archive / Web3</span>
+        <span class="sub" data-i18n="b4sub">Wrocław Archive S1 · mint / collect</span>
+      </a>
+
+      <a class="button ghost" href="#" id="grantsLink">
+        <span data-i18n="b5">Grants · transparency</span>
+        <span class="sub" data-i18n="b5sub">budgets · milestones · public reporting</span>
+      </a>
+
+      <a class="button" href="https://www.instagram.com/tutejszyvibe/" id="igLink">
+        <span data-i18n="b2">Instagram · вайб проекта</span>
+        <span class="sub">@tutejszyvibe</span>
+      </a>
+
+      <a class="button" href="https://t.me/hlbtyr" id="tgLink">
+        <span data-i18n="b3">Связаться напрямую</span>
+        <span class="sub" data-i18n="b3sub">Telegram · tutejszyvibe@gmail.com</span>
+      </a>
+    </div>
+
+    <!-- About -->
+    <div class="section">
+      <h2 data-i18n="aboutTitle">О проекте</h2>
+      <p data-i18n="aboutText">
+        Tutéjšy Vibe — авторский проект о городе, которого не показывают в путеводителях.
+        Прогулки по Nadodrze и Ołbin, мобильное приложение, выставки и NFT-архив соединяют
+        историю, улицу и личный опыт — как живую память города.
+      </p>
+      <div class="pill" data-i18n="pill1">Urban memory · field work · archive</div>
+    </div>
+
+    <!-- Web3 / Archive -->
+    <div class="section" id="archive">
+      <h2 data-i18n="web3Title">NFT-архив (Web3)</h2>
+      <p data-i18n="web3Text">
+        Здесь NFT — не спекуляция. Это децентрализованный культурный архив: фотографии, тексты и истории,
+        закреплённые как цифровые артефакты. Проект масштабируется: Wrocław → Prague → другие города.
+      </p>
+      <ul>
+        <li data-i18n="web3li1">Коллекции: Wrocław Archive S1 (первый сезон)</li>
+        <li data-i18n="web3li2">Формат: NFT + постеры A2/A3 + выставка</li>
+        <li data-i18n="web3li3">Доступ: коллекционеры получают ранний доступ и приглашения</li>
+      </ul>
+      <div class="tiny" data-i18n="web3Tiny">
+        TODO: добавь ссылку на mint/marketplace (Objkt/Teia/другую платформу) в кнопке “NFT Archive”.
       </div>
     </div>
 
-    <h1>Tutéjšy Vibe</h1>
-    <div class="subtitle" data-i18n="subtitle">Tutéjšy vibe · Nadodrže – Ołbin · Wrocław</div>
-    <div class="tagline" data-i18n="tagline">Progulki · aplikacija · vystava · plakaty · NFT-arhiv goroda</div>
+    <!-- Grants -->
+    <div class="section" id="grants">
+      <h2 data-i18n="grantsTitle">Гранты и прозрачность</h2>
+      <p data-i18n="grantsText">
+        Грантовое финансирование нужно для этичной оплаты работы в поле, маркетинга, производства выставки,
+        создания сайта и архивирования коллекций. Я публикую бюджеты, этапы и отчётность — как public goods.
+      </p>
+      <ul>
+        <li data-i18n="grantsli1">Creator fee + field work compensation (включая риск)</li>
+        <li data-i18n="grantsli2">Marketing (20–35% бюджета) для реального reach</li>
+        <li data-i18n="grantsli3">Website / documentation / public reporting</li>
+      </ul>
+      <div class="tiny" data-i18n="grantsTiny">
+        TODO: вставь ссылку на PDF/Notion страницу с бюджетами и milestones в кнопке “Grants”.
+      </div>
+    </div>
 
-    <
+    <!-- Contacts -->
+    <div class="section">
+      <h2 data-i18n="contactTitle">Контакты</h2>
+      <div class="contact">
+        Telegram: <a href="https://t.me/hlbtyr">@hlbtyr</a><br/>
+        Email: <a href="mailto:tutejszyvibe@gmail.com">tutejszyvibe@gmail.com</a><br/>
+        Instagram: <a href="https://www.instagram.com/tutejszyvibe/">@tutejszyvibe</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // TODO: set your real links here
+    const LINKS = {
+      nft: "https://example.com/mint",     // <-- put mint/market link
+      grants: "https://example.com/grants" // <-- put budgets/milestones link (Notion/PDF)
+    };
+    document.getElementById("nftLink").href = LINKS.nft;
+    document.getElementById("grantsLink").href = LINKS.grants;
+
+    const T = {
+      ru: {
+        subtitle: "Тутейший вайб · Nadodrze – Ołbin · Wrocław",
+        tagline: "Прогулки · приложение · выставка · NFT-архив города",
+        b1: "Прогулки · приложение",
+        b1sub: "Маршруты · скидки партнёров · обновления",
+        b2: "Instagram · вайб проекта",
+        b3: "Связаться напрямую",
+        b3sub: "Telegram · tutejszyvibe@gmail.com",
+        b4: "NFT Archive / Web3",
+        b4sub: "Wrocław Archive S1 · mint / collect",
+        b5: "Grants · transparency",
+        b5sub: "budgets · milestones · public reporting",
+        aboutTitle: "О проекте",
+        aboutText: "Tutéjšy Vibe — авторский проект о городе, которого не показывают в путеводителях. Прогулки по Nadodrze и Ołbin, мобильное приложение, выставки и NFT-архив соединяют историю, улицу и личный опыт — как живую память города.",
+        pill1: "Urban memory · field work · archive",
+        web3Title: "NFT-архив (Web3)",
+        web3Text: "Здесь NFT — не спекуляция. Это децентрализованный культурный архив: фотографии, тексты и истории, закреплённые как цифровые артефакты. Проект масштабируется: Wrocław → Prague → другие города.",
+        web3li1: "Коллекции: Wrocław Archive S1 (первый сезон)",
+        web3li2: "Формат: NFT + постеры A2/A3 + выставка",
+        web3li3: "Доступ: коллекционеры получают ранний доступ и приглашения",
+        web3Tiny: "TODO: добавь ссылку на mint/marketplace (Objkt/Teia/другую платформу) в кнопке “NFT Archive”.",
+        grantsTitle: "Гранты и прозрачность",
+        grantsText: "Грантовое финансирование нужно для этичной оплаты работы в поле, маркетинга, производства выставки, создания сайта и архивирования коллекций. Я публикую бюджеты, этапы и отчётность — как public goods.",
+        grantsli1: "Creator fee + field work compensation (включая риск)",
+        grantsli2: "Marketing (20–35% бюджета) для реального reach",
+        grantsli3: "Website / documentation / public reporting",
+        grantsTiny: "TODO: вставь ссылку на PDF/Notion страницу с бюджетами и milestones в кнопке “Grants”.",
+        contactTitle: "Контакты"
+      },
+      pl: {
+        subtitle: "Tutéjšy vibe · Nadodrze – Ołbin · Wrocław",
+        tagline: "Spacery · aplikacja · wystawa · archiwum NFT miasta",
+        b1: "Spacery · aplikacja",
+        b1sub: "Trasy · zniżki partnerów · aktualizacje",
+        b2: "Instagram · klimat projektu",
+        b3: "Kontakt bezpośredni",
+        b3sub: "Telegram · tutejszyvibe@gmail.com",
+        b4: "Archiwum NFT / Web3",
+        b4sub: "Wrocław Archive S1 · mint / collect",
+        b5: "Granty · transparentność",
+        b5sub: "budżety · etapy · raportowanie",
+        aboutTitle: "O projekcie",
+        aboutText: "Tutéjšy Vibe to autorski projekt o mieście niewidocznym w przewodnikach. Spacery po Nadodrzu i Ołbinie, aplikacja mobilna, wystawy oraz archiwum NFT łączą historię, ulicę i osobiste doświadczenie — jako żywą pamięć miasta.",
+        pill1: "Pamięć miejska · praca w terenie · archiwum",
+        web3Title: "Archiwum NFT (Web3)",
+        web3Text: "NFT to nie spekulacja. To zdecentralizowane archiwum kulturowe: fotografie, teksty i historie jako cyfrowe artefakty. Projekt jest skalowalny: Wrocław → Praga → kolejne miasta.",
+        web3li1: "Kolekcje: Wrocław Archive S1 (sezon 1)",
+        web3li2: "Format: NFT + plakaty A2/A3 + wystawa",
+        web3li3: "Dostęp: kolekcjonerzy otrzymują wcześniejszy dostęp i zaproszenia",
+        web3Tiny: "TODO: dodaj link do mint/marketplace w przycisku “Archiwum NFT”.",
+        grantsTitle: "Granty i transparentność",
+        grantsText: "Finansowanie grantowe obejmuje etyczne wynagrodzenie za pracę w terenie, marketing, produkcję wystawy, stronę www i archiwizację kolekcji. Publikuję budżety, etapy i raporty jako public goods.",
+        grantsli1: "Wynagrodzenie twórcy + praca w terenie (w tym ryzyko)",
+        grantsli2: "Marketing (20–35% budżetu) dla realnego zasięgu",
+        grantsli3: "Strona www / dokumentacja / raportowanie",
+        grantsTiny: "TODO: wstaw link do PDF/Notion z budżetami i etapami w przycisku “Granty”.",
+        contactTitle: "Kontakt"
+      },
+      en: {
+        subtitle: "Local vibe · Nadodrze – Ołbin · Wrocław",
+        tagline: "Walks · app · exhibition · decentralized city NFT archive",
+        b1: "Walks · app",
+        b1sub: "Routes · partner perks · updates",
+        b2: "Instagram · project vibe",
+        b3: "Contact directly",
+        b3sub: "Telegram · tutejszyvibe@gmail.com",
+        b4: "NFT Archive / Web3",
+        b4sub: "Wrocław Archive S1 · mint / collect",
+        b5: "Grants · transparency",
+        b5sub: "budgets · milestones · public reporting",
+        aboutTitle: "About the project",
+        aboutText: "Tutéjšy Vibe is an author’s project about a city you won’t find in guidebooks. Walks through Nadodrze and Ołbin, a mobile app, exhibitions, and an NFT archive connect history, street life, and personal experience — as living urban memory.",
+        pill1: "Urban memory · field work · archive",
+        web3Title: "NFT Archive (Web3)",
+        web3Text: "NFTs here are not speculation. They are a decentralized cultural archive: photographs, texts, and stories preserved as digital artifacts. The project scales: Wrocław → Prague → other cities.",
+        web3li1: "Collections: Wrocław Archive S1 (Season 1)",
+        web3li2: "Format: NFTs + A2/A3 posters + exhibition",
+        web3li3: "Access: collectors receive early access and invitations",
+        web3Tiny: "TODO: add your mint/marketplace link to the “NFT Archive” button.",
+        grantsTitle: "Grants & transparency",
+        grantsText: "Grant funding covers ethical creator compensation, field work, marketing, exhibition production, website, and long-term archiving. I publish budgets, milestones, and reporting as public goods.",
+        grantsli1: "Creator fee + field work compensation (incl. risk)",
+        grantsli2: "Marketing (20–35% of budget) for real reach",
+        grantsli3: "Website / documentation / public reporting",
+        grantsTiny: "TODO: add your budgets/milestones PDF/Notion link to the “Grants” button.",
+        contactTitle: "Contact"
+      }
+    };
+
+    const i18nNodes = document.querySelectorAll("[data-i18n]");
+    function setLang(lang) {
+      i18nNodes.forEach(node => {
+        const key = node.getAttribute("data-i18n");
+        if (T[lang] && T[lang][key]) node.textContent = T[lang][key];
+      });
+
+      document.documentElement.lang = lang === "pl" ? "pl" : (lang === "en" ? "en" : "ru");
+
+      document.querySelectorAll(".lang button").forEach(b => {
+        const active = b.dataset.lang === lang;
+        b.classList.toggle("active", active);
+        b.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
+      try { localStorage.setItem("tv_lang", lang); } catch (e) {}
+    }
+
+    document.querySelectorAll(".lang button").forEach(btn => {
+      btn.addEventListener("click", () => setLang(btn.dataset.lang));
+    });
+
+    // init
+    let saved = "ru";
+    try { saved = localStorage.getItem("tv_lang") || "ru"; } catch (e) {}
+    if (!T[saved]) saved = "ru";
+    setLang(saved);
+  </script>
+
+</body>
+</html>
