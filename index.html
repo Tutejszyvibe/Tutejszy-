@@ -3,17 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tutéjšy Vibe</title>
-  <meta name="description" content="Tutéjšy Vibe — прогулки, приложение, выставка и NFT-архив города." />
+
+  <title>Tutéjšy Vibe — цифровая туристическая инфраструктура Вроцлава</title>
+  <meta name="description" content="Tutéjšy Vibe — цифровая туристическая инфраструктура Вроцлава: маршруты Nadodrze–Ołbin, приложение, выставка, цифровое искусство и городской архив." />
   <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tutéjšy Vibe" />
+  <meta property="og:description" content="Цифровая туристическая инфраструктура Вроцлава: город, искусство, маршруты и архив." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tutejszyvibe.com" />
+  <!-- TODO: og:image -->
 
   <style>
     * { box-sizing: border-box; }
+    :root{
+      --bg:#0b0b0b;
+      --fg:#ffffff;
+      --muted:#b7b7b7;
+      --muted2:#9a9a9a;
+      --card: rgba(255,255,255,.04);
+      --stroke: rgba(255,255,255,.12);
+      --stroke2: rgba(255,255,255,.15);
+
+      /* Accent (яркий, но сочетающийся) */
+      --accent:#ffb000;      /* янтарный электро */
+      --accent2:#ffcf55;     /* мягкая подсветка */
+      --accentText:#0b0b0b;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #0b0b0b;
-      color: #ffffff;
+      background: var(--bg);
+      color: var(--fg);
     }
     a { color: inherit; text-decoration: none; }
 
@@ -23,26 +46,31 @@
       padding: 28px 20px 40px;
     }
 
+    /* Language */
     .lang {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 22px;
     }
-
     .lang button {
-      background: transparent;
-      color: #aaa;
-      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.03);
+      color: #c9c9c9;
+      border: 1px solid rgba(255,255,255,.18);
       border-radius: 999px;
-      padding: 6px 10px;
+      padding: 7px 11px;
       font-size: 12px;
       cursor: pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+      user-select: none;
     }
-
+    .lang button:hover { transform: translateY(-1px); }
     .lang button.active {
-      color: #fff;
-      border-color: #fff;
+      color: var(--accentText);
+      border-color: rgba(255,176,0,.9);
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,176,0,.18);
     }
 
     h1 {
@@ -55,16 +83,28 @@
     .subtitle {
       text-align: center;
       font-size: 13px;
-      color: #b7b7b7;
-      margin-bottom: 10px;
+      color: var(--muted);
+      margin-bottom: 8px;
     }
 
     .tagline {
       text-align: center;
       font-size: 12px;
-      color: #9a9a9a;
-      margin-bottom: 28px;
+      color: var(--muted2);
+      margin-bottom: 20px;
       line-height: 1.5;
+    }
+
+    .heroNote {
+      text-align: center;
+      font-size: 12px;
+      color: #cfcfcf;
+      line-height: 1.6;
+      margin-bottom: 26px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      background: var(--card);
     }
 
     .buttons {
@@ -78,7 +118,7 @@
       border-radius: 14px;
       text-align: center;
       font-size: 16px;
-      border: 1px solid rgba(255,255,255,.15);
+      border: 1px solid var(--stroke2);
       background: rgba(255,255,255,.05);
     }
 
@@ -87,6 +127,7 @@
       font-size: 12px;
       color: #aaa;
       margin-top: 4px;
+      line-height: 1.4;
     }
 
     .button.primary {
@@ -122,15 +163,14 @@
       margin: 10px 0 0;
     }
 
-    .contact {
-      font-size: 13px;
-      color: #aaa;
-      line-height: 1.6;
+    .pillRow {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .pill {
-      display: inline-block;
-      margin-top: 10px;
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.15);
@@ -145,240 +185,471 @@
       line-height: 1.6;
       margin-top: 10px;
     }
+
+    .contact {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.6;
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+<div class="wrap">
 
-    <!-- Language switch -->
-    <div class="lang" role="tablist" aria-label="Language">
-      <button class="active" data-lang="ru" aria-pressed="true">RU</button>
-      <button data-lang="pl" aria-pressed="false">PL</button>
-      <button data-lang="en" aria-pressed="false">EN</button>
-    </div>
-
-    <!-- Hero -->
-    <h1>Tutéjšy Vibe</h1>
-    <div class="subtitle" data-i18n="subtitle">
-      Тутейший вайб · Nadodrze – Ołbin · Wrocław
-    </div>
-    <div class="tagline" data-i18n="tagline">
-      Прогулки · приложение · выставка · NFT-архив города
-    </div>
-
-    <!-- Buttons -->
-    <div class="buttons">
-      <a class="button primary" href="https://tutejszyvibe.glide.page" id="appLink">
-        <span data-i18n="b1">Прогулки · приложение</span>
-        <span class="sub" data-i18n="b1sub">Маршруты · скидки партнёров · обновления</span>
-      </a>
-
-      <a class="button" href="#" id="nftLink">
-        <span data-i18n="b4">NFT Archive / Web3</span>
-        <span class="sub" data-i18n="b4sub">Wrocław Archive S1 · mint / collect</span>
-      </a>
-
-      <a class="button ghost" href="#" id="grantsLink">
-        <span data-i18n="b5">Grants · transparency</span>
-        <span class="sub" data-i18n="b5sub">budgets · milestones · public reporting</span>
-      </a>
-
-      <a class="button" href="https://www.instagram.com/tutejszyvibe/" id="igLink">
-        <span data-i18n="b2">Instagram · вайб проекта</span>
-        <span class="sub">@tutejszyvibe</span>
-      </a>
-
-      <a class="button" href="https://t.me/hlbtyr" id="tgLink">
-        <span data-i18n="b3">Связаться напрямую</span>
-        <span class="sub" data-i18n="b3sub">Telegram · tutejszyvibe@gmail.com</span>
-      </a>
-    </div>
-
-    <!-- About -->
-    <div class="section">
-      <h2 data-i18n="aboutTitle">О проекте</h2>
-      <p data-i18n="aboutText">
-        Tutéjšy Vibe — авторский проект о городе, которого не показывают в путеводителях.
-        Прогулки по Nadodrze и Ołbin, мобильное приложение, выставки и NFT-архив соединяют
-        историю, улицу и личный опыт — как живую память города.
-      </p>
-      <div class="pill" data-i18n="pill1">Urban memory · field work · archive</div>
-    </div>
-
-    <!-- Web3 / Archive -->
-    <div class="section" id="archive">
-      <h2 data-i18n="web3Title">NFT-архив (Web3)</h2>
-      <p data-i18n="web3Text">
-        Здесь NFT — не спекуляция. Это децентрализованный культурный архив: фотографии, тексты и истории,
-        закреплённые как цифровые артефакты. Проект масштабируется: Wrocław → Prague → другие города.
-      </p>
-      <ul>
-        <li data-i18n="web3li1">Коллекции: Wrocław Archive S1 (первый сезон)</li>
-        <li data-i18n="web3li2">Формат: NFT + постеры A2/A3 + выставка</li>
-        <li data-i18n="web3li3">Доступ: коллекционеры получают ранний доступ и приглашения</li>
-      </ul>
-      <div class="tiny" data-i18n="web3Tiny">
-        TODO: добавь ссылку на mint/marketplace (Objkt/Teia/другую платформу) в кнопке “NFT Archive”.
-      </div>
-    </div>
-
-    <!-- Grants -->
-    <div class="section" id="grants">
-      <h2 data-i18n="grantsTitle">Гранты и прозрачность</h2>
-      <p data-i18n="grantsText">
-        Грантовое финансирование нужно для этичной оплаты работы в поле, маркетинга, производства выставки,
-        создания сайта и архивирования коллекций. Я публикую бюджеты, этапы и отчётность — как public goods.
-      </p>
-      <ul>
-        <li data-i18n="grantsli1">Creator fee + field work compensation (включая риск)</li>
-        <li data-i18n="grantsli2">Marketing (20–35% бюджета) для реального reach</li>
-        <li data-i18n="grantsli3">Website / documentation / public reporting</li>
-      </ul>
-      <div class="tiny" data-i18n="grantsTiny">
-        TODO: вставь ссылку на PDF/Notion страницу с бюджетами и milestones в кнопке “Grants”.
-      </div>
-    </div>
-
-    <!-- Contacts -->
-    <div class="section">
-      <h2 data-i18n="contactTitle">Контакты</h2>
-      <div class="contact">
-        Telegram: <a href="https://t.me/hlbtyr">@hlbtyr</a><br/>
-        Email: <a href="mailto:tutejszyvibe@gmail.com">tutejszyvibe@gmail.com</a><br/>
-        Instagram: <a href="https://www.instagram.com/tutejszyvibe/">@tutejszyvibe</a>
-      </div>
-    </div>
-
+  <!-- Language -->
+  <div class="lang" id="langSwitch">
+    <button class="active" data-lang="ru">RU</button>
+    <button data-lang="be">BY</button>
+    <button data-lang="pl">PL</button>
+    <button data-lang="isv">ISV</button>
+    <button data-lang="en">EN</button>
+    <button data-lang="it">IT</button>
+    <button data-lang="es">ES</button>
+    <button data-lang="de">DE</button>
   </div>
 
-  <script>
-    // TODO: set your real links here
-    const LINKS = {
-      nft: "https://example.com/mint",     // <-- put mint/market link
-      grants: "https://example.com/grants" // <-- put budgets/milestones link (Notion/PDF)
-    };
-    document.getElementById("nftLink").href = LINKS.nft;
-    document.getElementById("grantsLink").href = LINKS.grants;
+  <!-- Hero -->
+  <h1>Tutéjšy Vibe</h1>
+  <div class="subtitle" data-i18n="hero_subtitle">
+    Nadodrze – Ołbin · Wrocław
+  </div>
 
-    const T = {
-      ru: {
-        subtitle: "Тутейший вайб · Nadodrze – Ołbin · Wrocław",
-        tagline: "Прогулки · приложение · выставка · NFT-архив города",
-        b1: "Прогулки · приложение",
-        b1sub: "Маршруты · скидки партнёров · обновления",
-        b2: "Instagram · вайб проекта",
-        b3: "Связаться напрямую",
-        b3sub: "Telegram · tutejszyvibe@gmail.com",
-        b4: "NFT Archive / Web3",
-        b4sub: "Wrocław Archive S1 · mint / collect",
-        b5: "Grants · transparency",
-        b5sub: "budgets · milestones · public reporting",
-        aboutTitle: "О проекте",
-        aboutText: "Tutéjšy Vibe — авторский проект о городе, которого не показывают в путеводителях. Прогулки по Nadodrze и Ołbin, мобильное приложение, выставки и NFT-архив соединяют историю, улицу и личный опыт — как живую память города.",
-        pill1: "Urban memory · field work · archive",
-        web3Title: "NFT-архив (Web3)",
-        web3Text: "Здесь NFT — не спекуляция. Это децентрализованный культурный архив: фотографии, тексты и истории, закреплённые как цифровые артефакты. Проект масштабируется: Wrocław → Prague → другие города.",
-        web3li1: "Коллекции: Wrocław Archive S1 (первый сезон)",
-        web3li2: "Формат: NFT + постеры A2/A3 + выставка",
-        web3li3: "Доступ: коллекционеры получают ранний доступ и приглашения",
-        web3Tiny: "TODO: добавь ссылку на mint/marketplace (Objkt/Teia/другую платформу) в кнопке “NFT Archive”.",
-        grantsTitle: "Гранты и прозрачность",
-        grantsText: "Грантовое финансирование нужно для этичной оплаты работы в поле, маркетинга, производства выставки, создания сайта и архивирования коллекций. Я публикую бюджеты, этапы и отчётность — как public goods.",
-        grantsli1: "Creator fee + field work compensation (включая риск)",
-        grantsli2: "Marketing (20–35% бюджета) для реального reach",
-        grantsli3: "Website / documentation / public reporting",
-        grantsTiny: "TODO: вставь ссылку на PDF/Notion страницу с бюджетами и milestones в кнопке “Grants”.",
-        contactTitle: "Контакты"
-      },
-      pl: {
-        subtitle: "Tutéjšy vibe · Nadodrze – Ołbin · Wrocław",
-        tagline: "Spacery · aplikacja · wystawa · archiwum NFT miasta",
-        b1: "Spacery · aplikacja",
-        b1sub: "Trasy · zniżki partnerów · aktualizacje",
-        b2: "Instagram · klimat projektu",
-        b3: "Kontakt bezpośredni",
-        b3sub: "Telegram · tutejszyvibe@gmail.com",
-        b4: "Archiwum NFT / Web3",
-        b4sub: "Wrocław Archive S1 · mint / collect",
-        b5: "Granty · transparentność",
-        b5sub: "budżety · etapy · raportowanie",
-        aboutTitle: "O projekcie",
-        aboutText: "Tutéjšy Vibe to autorski projekt o mieście niewidocznym w przewodnikach. Spacery po Nadodrzu i Ołbinie, aplikacja mobilna, wystawy oraz archiwum NFT łączą historię, ulicę i osobiste doświadczenie — jako żywą pamięć miasta.",
-        pill1: "Pamięć miejska · praca w terenie · archiwum",
-        web3Title: "Archiwum NFT (Web3)",
-        web3Text: "NFT to nie spekulacja. To zdecentralizowane archiwum kulturowe: fotografie, teksty i historie jako cyfrowe artefakty. Projekt jest skalowalny: Wrocław → Praga → kolejne miasta.",
-        web3li1: "Kolekcje: Wrocław Archive S1 (sezon 1)",
-        web3li2: "Format: NFT + plakaty A2/A3 + wystawa",
-        web3li3: "Dostęp: kolekcjonerzy otrzymują wcześniejszy dostęp i zaproszenia",
-        web3Tiny: "TODO: dodaj link do mint/marketplace w przycisku “Archiwum NFT”.",
-        grantsTitle: "Granty i transparentność",
-        grantsText: "Finansowanie grantowe obejmuje etyczne wynagrodzenie za pracę w terenie, marketing, produkcję wystawy, stronę www i archiwizację kolekcji. Publikuję budżety, etapy i raporty jako public goods.",
-        grantsli1: "Wynagrodzenie twórcy + praca w terenie (w tym ryzyko)",
-        grantsli2: "Marketing (20–35% budżetu) dla realnego zasięgu",
-        grantsli3: "Strona www / dokumentacja / raportowanie",
-        grantsTiny: "TODO: wstaw link do PDF/Notion z budżetami i etapami w przycisku “Granty”.",
-        contactTitle: "Kontakt"
-      },
-      en: {
-        subtitle: "Local vibe · Nadodrze – Ołbin · Wrocław",
-        tagline: "Walks · app · exhibition · decentralized city NFT archive",
-        b1: "Walks · app",
-        b1sub: "Routes · partner perks · updates",
-        b2: "Instagram · project vibe",
-        b3: "Contact directly",
-        b3sub: "Telegram · tutejszyvibe@gmail.com",
-        b4: "NFT Archive / Web3",
-        b4sub: "Wrocław Archive S1 · mint / collect",
-        b5: "Grants · transparency",
-        b5sub: "budgets · milestones · public reporting",
-        aboutTitle: "About the project",
-        aboutText: "Tutéjšy Vibe is an author’s project about a city you won’t find in guidebooks. Walks through Nadodrze and Ołbin, a mobile app, exhibitions, and an NFT archive connect history, street life, and personal experience — as living urban memory.",
-        pill1: "Urban memory · field work · archive",
-        web3Title: "NFT Archive (Web3)",
-        web3Text: "NFTs here are not speculation. They are a decentralized cultural archive: photographs, texts, and stories preserved as digital artifacts. The project scales: Wrocław → Prague → other cities.",
-        web3li1: "Collections: Wrocław Archive S1 (Season 1)",
-        web3li2: "Format: NFTs + A2/A3 posters + exhibition",
-        web3li3: "Access: collectors receive early access and invitations",
-        web3Tiny: "TODO: add your mint/marketplace link to the “NFT Archive” button.",
-        grantsTitle: "Grants & transparency",
-        grantsText: "Grant funding covers ethical creator compensation, field work, marketing, exhibition production, website, and long-term archiving. I publish budgets, milestones, and reporting as public goods.",
-        grantsli1: "Creator fee + field work compensation (incl. risk)",
-        grantsli2: "Marketing (20–35% of budget) for real reach",
-        grantsli3: "Website / documentation / public reporting",
-        grantsTiny: "TODO: add your budgets/milestones PDF/Notion link to the “Grants” button.",
-        contactTitle: "Contact"
-      }
-    };
+  <div class="tagline" data-i18n="hero_tagline">
+    Цифровая туристическая инфраструктура города
+  </div>
 
-    const i18nNodes = document.querySelectorAll("[data-i18n]");
-    function setLang(lang) {
-      i18nNodes.forEach(node => {
-        const key = node.getAttribute("data-i18n");
-        if (T[lang] && T[lang][key]) node.textContent = T[lang][key];
-      });
+  <div class="heroNote" data-i18n="hero_note">
+    Переплетение цифровой истории, настоящего и будущего города — через эмпатию, искусство и живые районы.
+  </div>
 
-      document.documentElement.lang = lang === "pl" ? "pl" : (lang === "en" ? "en" : "ru");
+  <!-- Actions -->
+  <div class="buttons">
+    <a class="button primary" href="https://tutejszyvibewroclaw.glide.page">
+      <span data-i18n="btn_app_title">Прогулки · приложение</span>
+      <span class="sub" data-i18n="btn_app_sub">маршруты · навигация · партнёрские места</span>
+    </a>
 
-      document.querySelectorAll(".lang button").forEach(b => {
-        const active = b.dataset.lang === lang;
-        b.classList.toggle("active", active);
-        b.setAttribute("aria-pressed", active ? "true" : "false");
-      });
+    <a class="button" href="#exhibition">
+      <span data-i18n="btn_exh_title">Выставка</span>
+      <span class="sub" data-i18n="btn_exh_sub">физическое и цифровое искусство · Вроцлав</span>
+    </a>
 
-      try { localStorage.setItem("tv_lang", lang); } catch (e) {}
+    <a class="button" href="#archive">
+      <span data-i18n="btn_nft_title">Цифровое искусство · NFT</span>
+      <span class="sub" data-i18n="btn_nft_sub">архив · коллекции · поддержка проекта</span>
+    </a>
+
+    <a class="button ghost" href="https://www.instagram.com/tutejszyvibe/">
+      <span data-i18n="btn_ig_title">Instagram</span>
+      <span class="sub">@tutejszyvibe</span>
+    </a>
+
+    <a class="button" href="https://t.me/hlbtyr">
+      <span data-i18n="btn_contact_title">Связаться</span>
+      <span class="sub" data-i18n="btn_contact_sub">Telegram · tutejszyvibe@gmail.com</span>
+    </a>
+  </div>
+
+  <!-- About -->
+  <div class="section">
+    <h2 data-i18n="about_h2">О проекте</h2>
+    <p data-i18n="about_p">
+      Tutéjšy Vibe — городской авторский проект, развивающийся в цифровую туристическую инфраструктуру Вроцлава.
+      Мы создаём маршруты, приложение, выставки и цифровое искусство, которые помогают людям ориентироваться в городе,
+      понимать его культурные слои и чувствовать живую ткань районов.
+    </p>
+    <div class="pillRow">
+      <span class="pill">urban infrastructure</span>
+      <span class="pill">digital art</span>
+      <span class="pill">local culture</span>
+      <span class="pill">people-first</span>
+    </div>
+  </div>
+
+  <!-- Exhibition -->
+  <div class="section" id="exhibition">
+    <h2 data-i18n="exh_h2">Выставка</h2>
+    <p data-i18n="exh_p1">
+      Проект уже присутствует в физическом пространстве города.
+      Выставка объединяет фотографию, цифровое искусство и городскую историю,
+      показывая, как Вроцлав меняется не только внешне, но и изнутри.
+    </p>
+    <p class="tiny" data-i18n="exh_tiny">
+      Кураторский формат · локальный контекст · диалог с городом
+    </p>
+  </div>
+
+  <!-- Archive / NFT -->
+  <div class="section" id="archive">
+    <h2 data-i18n="nft_h2">Цифровое искусство и архив</h2>
+    <p data-i18n="nft_p">
+      NFT в рамках проекта — это не спекуляция, а форма цифрового искусства и способ
+      зафиксировать город как культурный слой. Коллекции объединяют визуальный архив,
+      тексты и авторский взгляд.
+    </p>
+    <ul>
+      <li data-i18n="nft_li1">Wrocław Archive · Season 1</li>
+      <li data-i18n="nft_li2">цифровое искусство + физические носители</li>
+      <li data-i18n="nft_li3">поддержка проекта и ранний доступ</li>
+    </ul>
+    <div class="tiny" data-i18n="nft_tiny">
+      Marketplace / mint будет добавлен в этом разделе
+    </div>
+  </div>
+
+  <!-- Vision -->
+  <div class="section">
+    <h2 data-i18n="dev_h2">Развитие</h2>
+    <p data-i18n="dev_p1">
+      Проект масштабируется органически: новые маршруты, новые авторы,
+      новые города. Tutéjšy Vibe остаётся авторским по духу,
+      но открытым для людей, команд и партнёров.
+    </p>
+    <p class="tiny" data-i18n="dev_tiny">
+      Это долгосрочный предпринимательский и культурный процесс.
+    </p>
+  </div>
+
+  <!-- Contacts -->
+  <div class="section">
+    <h2 data-i18n="contact_h2">Контакты</h2>
+    <div class="contact">
+      Telegram: <a href="https://t.me/hlbtyr">@hlbtyr</a><br/>
+      Email: <a href="mailto:tutejszyvibe@gmail.com">tutejszyvibe@gmail.com</a><br/>
+      Instagram: <a href="https://www.instagram.com/tutejszyvibe/">@tutejszyvibe</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Minimal i18n dictionary
+  const i18n = {
+    ru: {
+      hero_subtitle: "Nadodrze – Ołbin · Wrocław",
+      hero_tagline: "Цифровая туристическая инфраструктура города",
+      hero_note: "Переплетение цифровой истории, настоящего и будущего города — через эмпатию, искусство и живые районы.",
+
+      btn_app_title: "Прогулки · приложение",
+      btn_app_sub: "маршруты · навигация · партнёрские места",
+      btn_exh_title: "Выставка",
+      btn_exh_sub: "физическое и цифровое искусство · Вроцлав",
+      btn_nft_title: "Цифровое искусство · NFT",
+      btn_nft_sub: "архив · коллекции · поддержка проекта",
+      btn_ig_title: "Instagram",
+      btn_contact_title: "Связаться",
+      btn_contact_sub: "Telegram · tutejszyvibe@gmail.com",
+
+      about_h2: "О проекте",
+      about_p: "Tutéjšy Vibe — городской авторский проект, развивающийся в цифровую туристическую инфраструктуру Вроцлава. Мы создаём маршруты, приложение, выставки и цифровое искусство, которые помогают людям ориентироваться в городе, понимать его культурные слои и чувствовать живую ткань районов.",
+
+      exh_h2: "Выставка",
+      exh_p1: "Проект уже присутствует в физическом пространстве города. Выставка объединяет фотографию, цифровое искусство и городскую историю, показывая, как Вроцлав меняется не только внешне, но и изнутри.",
+      exh_tiny: "Кураторский формат · локальный контекст · диалог с городом",
+
+      nft_h2: "Цифровое искусство и архив",
+      nft_p: "NFT в рамках проекта — это не спекуляция, а форма цифрового искусства и способ зафиксировать город как культурный слой. Коллекции объединяют визуальный архив, тексты и авторский взгляд.",
+      nft_li1: "Wrocław Archive · Season 1",
+      nft_li2: "цифровое искусство + физические носители",
+      nft_li3: "поддержка проекта и ранний доступ",
+      nft_tiny: "Marketplace / mint будет добавлен в этом разделе",
+
+      dev_h2: "Развитие",
+      dev_p1: "Проект масштабируется органически: новые маршруты, новые авторы, новые города. Tutéjšy Vibe остаётся авторским по духу, но открытым для людей, команд и партнёров.",
+      dev_tiny: "Это долгосрочный предпринимательский и культурный процесс.",
+
+      contact_h2: "Контакты"
+    },
+
+    be: {
+      hero_subtitle: "Nadodrze – Ołbin · Wrocław",
+      hero_tagline: "Лічбавая турыстычная інфраструктура горада",
+      hero_note: "Спляценне лічбавай гісторыі, сучаснасці і будучыні горада — праз эмпатыю, мастацтва і жывыя раёны.",
+
+      btn_app_title: "Прагулкі · дадатак",
+      btn_app_sub: "маршруты · навігацыя · партнёрскія месцы",
+      btn_exh_title: "Выстаўка",
+      btn_exh_sub: "фізічнае і лічбавае мастацтва · Вроцлаў",
+      btn_nft_title: "Лічбавае мастацтва · NFT",
+      btn_nft_sub: "архіў · калекцыі · падтрымка праекта",
+      btn_ig_title: "Instagram",
+      btn_contact_title: "Сувязацца",
+      btn_contact_sub: "Telegram · tutejszyvibe@gmail.com",
+
+      about_h2: "Пра праект",
+      about_p: "Tutéjšy Vibe — аўтарскі гарадскі праект, які развіваецца ў лічбавую турыстычную інфраструктуру Вроцлава. Мы ствараем маршруты, дадатак, выставы і лічбавае мастацтва, якія дапамагаюць арыентавацца ў горадзе, разумець яго культурныя пласты і адчуваць жывую тканіну раёнаў.",
+
+      exh_h2: "Выстаўка",
+      exh_p1: "Праект ужо прысутнічае ў фізічнай прасторы горада. Выстаўка аб’ядноўвае фатаграфію, лічбавае мастацтва і гарадскую гісторыю, паказваючы, як Вроцлаў змяняецца не толькі звонку, але і знутры.",
+      exh_tiny: "Куратарскі фармат · лакальны кантэкст · дыялог з горадам",
+
+      nft_h2: "Лічбавае мастацтва і архіў",
+      nft_p: "NFT у межах праекта — гэта не спекуляцыя, а форма лічбавага мастацтва і спосаб зафіксаваць горад як культурны пласт. Калекцыі аб’ядноўваюць візуальны архіў, тэксты і аўтарскі погляд.",
+      nft_li1: "Wrocław Archive · Season 1",
+      nft_li2: "лічбавае мастацтва + фізічныя носьбіты",
+      nft_li3: "падтрымка праекта і ранні доступ",
+      nft_tiny: "Marketplace / mint будзе дададзены ў гэтым раздзеле",
+
+      dev_h2: "Развіццё",
+      dev_p1: "Праект маштабуецца арганічна: новыя маршруты, новыя аўтары, новыя гарады. Tutéjšy Vibe застаецца аўтарскім па духу, але адкрытым для людзей, каманд і партнёраў.",
+      dev_tiny: "Гэта доўгатэрміновы прадпрымальніцкі і культурны працэс.",
+
+      contact_h2: "Кантакты"
+    },
+
+    pl: {
+      hero_subtitle: "Nadodrze – Ołbin · Wrocław",
+      hero_tagline: "Cyfrowa infrastruktura turystyczna miasta",
+      hero_note: "Splot cyfrowej historii, teraźniejszości i przyszłości miasta — przez empatię, sztukę i żywe dzielnice.",
+
+      btn_app_title: "Spacery · aplikacja",
+      btn_app_sub: "trasy · nawigacja · miejsca partnerskie",
+      btn_exh_title: "Wystawa",
+      btn_exh_sub: "sztuka fizyczna i cyfrowa · Wrocław",
+      btn_nft_title: "Sztuka cyfrowa · NFT",
+      btn_nft_sub: "archiwum · kolekcje · wsparcie projektu",
+      btn_ig_title: "Instagram",
+      btn_contact_title: "Kontakt",
+      btn_contact_sub: "Telegram · tutejszyvibe@gmail.com",
+
+      about_h2: "O projekcie",
+      about_p: "Tutéjšy Vibe to autorski projekt miejski, który rozwija się w cyfrową infrastrukturę turystyczną Wrocławia. Tworzymy trasy, aplikację, wystawy i sztukę cyfrową, które pomagają poruszać się po mieście, rozumieć jego warstwy kulturowe i czuć żywą tkankę dzielnic.",
+
+      exh_h2: "Wystawa",
+      exh_p1: "Projekt jest już obecny w fizycznej przestrzeni miasta. Wystawa łączy fotografię, sztukę cyfrową i historię miejską, pokazując jak Wrocław zmienia się nie tylko z zewnątrz, ale i od środka.",
+      exh_tiny: "Format kuratorski · lokalny kontekst · dialog z miastem",
+
+      nft_h2: "Sztuka cyfrowa i archiwum",
+      nft_p: "NFT w ramach projektu to nie spekulacja, lecz forma sztuki cyfrowej i sposób utrwalenia miasta jako warstwy kulturowej. Kolekcje łączą wizualne archiwum, teksty i autorską perspektywę.",
+      nft_li1: "Wrocław Archive · Season 1",
+      nft_li2: "sztuka cyfrowa + nośniki fizyczne",
+      nft_li3: "wsparcie projektu i wczesny dostęp",
+      nft_tiny: "Marketplace / mint zostanie dodany w tej sekcji",
+
+      dev_h2: "Rozwój",
+      dev_p1: "Projekt skaluje się organicznie: nowe trasy, nowi autorzy, nowe miasta. Tutéjšy Vibe pozostaje autorski w duchu, ale otwarty na ludzi, zespoły i partnerów.",
+      dev_tiny: "To długoterminowy proces biznesowo-kulturowy.",
+
+      contact_h2: "Kontakt"
+    },
+
+    isv: {
+      hero_subtitle: "Nadodrze – Ołbin · Wrocław",
+      hero_tagline: "Digitalna turistična infrastruktura grada",
+      hero_note: "Spletenje digitalnoj historiji, sadašnjosti i budučnosti grada — črez empatiju, umjetnosť i živy rajony.",
+
+      btn_app_title: "Prohody · aplikacija",
+      btn_app_sub: "maršruty · navigacija · partnerske města",
+      btn_exh_title: "Vystava",
+      btn_exh_sub: "fizično i digitalno umjetstvo · Wrocław",
+      btn_nft_title: "Digitalno umjetstvo · NFT",
+      btn_nft_sub: "arhiv · kolekcije · podpora projekta",
+      btn_ig_title: "Instagram",
+      btn_contact_title: "Kontakt",
+      btn_contact_sub: "Telegram · tutejszyvibe@gmail.com",
+
+      about_h2: "O projektu",
+      about_p: "Tutéjšy Vibe jest avtorsky gradsky projekt, ktory se razviva v digitalnu turističnu infrastrukturu Wrocłava. My tvorimo maršruty, aplikaciju, vystavy i digitalno umjetstvo, ktore pomagajut ljudam orientovati se v gradu, razuměti jego kulturne sloje i čuti živu tkanj rajonov.",
+
+      exh_h2: "Vystava",
+      exh_p1: "Projekt už jest prisutny v fizičnom prostoru grada. Vystava jedini fotografiju, digitalno umjetstvo i gradsku historiju, pokazujuči kako Wrocław měnja se ne samo z vněška, no i iznutri.",
+      exh_tiny: "Kuratorsky format · lokalny kontekst · dialog s gradom",
+
+      nft_h2: "Digitalno umjetstvo i arhiv",
+      nft_p: "NFT v ramkah projekta ne jest spekulacija, no forma digitalnogo umjetstva i sposob fiksovati grad kak kulturny sloj. Kolekcije jedinjajut vizualny arhiv, teksty i avtorsky pogled.",
+      nft_li1: "Wrocław Archive · Season 1",
+      nft_li2: "digitalno umjetstvo + fizične nositeli",
+      nft_li3: "podpora projekta i ranji dostup",
+      nft_tiny: "Marketplace / mint bude dodany v tutoj sekcii",
+
+      dev_h2: "Razvoj",
+      dev_p1: "Projekt se skaluje organično: nove maršruty, novi avtory, nove grady. Tutéjšy Vibe ostava avtorsky po duhu, no otvoreny dlja ljudij, komand i partnerov.",
+      dev_tiny: "To jest dolgosročny podnikateljsky i kulturny proces.",
+
+      contact_h2: "Kontakty"
+    },
+
+    en: {
+      hero_subtitle: "Nadodrze – Ołbin · Wrocław",
+      hero_tagline: "A city's digital tourism infrastructure",
+      hero_note: "A weave of the city’s digital history, present, and future — through empathy, art, and living neighborhoods.",
+
+      btn_app_title: "Walks · app",
+      btn_app_sub: "routes · navigation · partner places",
+      btn_exh_title: "Exhibition",
+      btn_exh_sub: "physical & digital art · Wrocław",
+      btn_nft_title: "Digital art · NFT",
+      btn_nft_sub: "archive · collections · support",
+      btn_ig_title: "Instagram",
+      btn_contact_title: "Contact",
+      btn_contact_sub: "Telegram · tutejszyvibe@gmail.com",
+
+      about_h2: "About",
+      about_p: "Tutéjšy Vibe is an author-led urban project growing into Wrocław’s digital tourism infrastructure. We create routes, an app, exhibitions, and digital art that help people navigate the city, understand its cultural layers, and feel the living texture of its neighborhoods.",
+
+      exh_h2: "Exhibition",
+      exh_p1: "The project already exists in the city’s physical space. The exhibition brings together photography, digital art, and urban history — showing how Wrocław changes not only on the outside, but from within.",
+      exh_tiny: "Curated format · local context · dialogue with the city",
+
+      nft_h2: "Digital art & archive",
+      nft_p: "NFTs in this project are not speculation — they are digital art and a way to preserve the city as a cultural layer. Collections combine a visual archive, texts, and an author’s perspective.",
+      nft_li1: "Wrocław Archive · Season 1",
+      nft_li2: "digital art + physical editions",
+      nft_li3: "project support & early access",
+      nft_tiny: "Marketplace / mint will be added in this section",
+
+      dev_h2: "Growth",
+      dev_p1: "The project scales organically: new routes, new authors, new cities. Tutéjšy Vibe stays author-led in spirit, while remaining open to people, teams, and partners.",
+      dev_tiny: "A long-term cultural and entrepreneurial process.",
+
+      contact_h2: "Contacts"
+    },
+
+    it: {
+      hero_subtitle: "Nadodrze – Ołbin · Wrocław",
+      hero_tagline: "Infrastruttura turistica digitale della città",
+      hero_note: "Un intreccio di storia digitale, presente e futuro della città — attraverso empatia, arte e quartieri vivi.",
+
+      btn_app_title: "Passeggiate · app",
+      btn_app_sub: "percorsi · navigazione · luoghi partner",
+      btn_exh_title: "Mostra",
+      btn_exh_sub: "arte fisica e digitale · Wrocław",
+      btn_nft_title: "Arte digitale · NFT",
+      btn_nft_sub: "archivio · collezioni · supporto",
+      btn_ig_title: "Instagram",
+      btn_contact_title: "Contatti",
+      btn_contact_sub: "Telegram · tutejszyvibe@gmail.com",
+
+      about_h2: "Sul progetto",
+      about_p: "Tutéjšy Vibe è un progetto urbano d’autore che cresce come infrastruttura turistica digitale di Wrocław. Creiamo percorsi, un’app, mostre e arte digitale per aiutare le persone a orientarsi, capire gli strati culturali e sentire la trama viva dei quartieri.",
+
+      exh_h2: "Mostra",
+      exh_p1: "Il progetto è già presente nello spazio fisico della città. La mostra unisce fotografia, arte digitale e storia urbana, mostrando come Wrocław cambi non solo fuori, ma anche dentro.",
+      exh_tiny: "Formato curatoriale · contesto locale · dialogo con la città",
+
+      nft_h2: "Arte digitale e archivio",
+      nft_p: "Gli NFT nel progetto non sono speculazione: sono arte digitale e un modo per fissare la città come strato culturale. Le collezioni uniscono archivio visivo, testi e sguardo d’autore.",
+      nft_li1: "Wrocław Archive · Season 1",
+      nft_li2: "arte digitale + edizioni fisiche",
+      nft_li3: "supporto al progetto e accesso anticipato",
+      nft_tiny: "Marketplace / mint verrà aggiunto in questa sezione",
+
+      dev_h2: "Sviluppo",
+      dev_p1: "Il progetto cresce in modo organico: nuovi percorsi, nuovi autori, nuove città. Tutéjšy Vibe resta d’autore nello spirito, ma aperto a persone, team e partner.",
+      dev_tiny: "Un processo culturale e imprenditoriale a lungo termine.",
+
+      contact_h2: "Contatti"
+    },
+
+    es: {
+      hero_subtitle: "Nadodrze – Ołbin · Wrocław",
+      hero_tagline: "Infraestructura turística digital de la ciudad",
+      hero_note: "Un tejido de la historia digital, el presente y el futuro de la ciudad — a través de la empatía, el arte y barrios vivos.",
+
+      btn_app_title: "Paseos · app",
+      btn_app_sub: "rutas · navegación · lugares asociados",
+      btn_exh_title: "Exposición",
+      btn_exh_sub: "arte físico y digital · Wrocław",
+      btn_nft_title: "Arte digital · NFT",
+      btn_nft_sub: "archivo · colecciones · apoyo",
+      btn_ig_title: "Instagram",
+      btn_contact_title: "Contacto",
+      btn_contact_sub: "Telegram · tutejszyvibe@gmail.com",
+
+      about_h2: "Sobre el proyecto",
+      about_p: "Tutéjšy Vibe es un proyecto urbano de autor que crece como infraestructura turística digital de Wrocław. Creamos rutas, una app, exposiciones y arte digital para ayudar a orientarse, entender capas culturales y sentir la textura viva de los barrios.",
+
+      exh_h2: "Exposición",
+      exh_p1: "El proyecto ya existe en el espacio físico de la ciudad. La exposición une fotografía, arte digital e historia urbana, mostrando cómo Wrocław cambia no solo por fuera, sino también por dentro.",
+      exh_tiny: "Formato curatorial · contexto local · diálogo con la ciudad",
+
+      nft_h2: "Arte digital y archivo",
+      nft_p: "Los NFT en este proyecto no son especulación: son arte digital y una forma de preservar la ciudad como capa cultural. Las colecciones combinan un archivo visual, textos y una mirada de autor.",
+      nft_li1: "Wrocław Archive · Season 1",
+      nft_li2: "arte digital + ediciones físicas",
+      nft_li3: "apoyo al proyecto y acceso anticipado",
+      nft_tiny: "Marketplace / mint se añadirá en esta sección",
+
+      dev_h2: "Desarrollo",
+      dev_p1: "El proyecto escala de forma orgánica: nuevas rutas, nuevos autores, nuevas ciudades. Tutéjšy Vibe mantiene el espíritu de autor, y a la vez está abierto a personas, equipos y socios.",
+      dev_tiny: "Un proceso cultural y emprendedor a largo plazo.",
+
+      contact_h2: "Contactos"
+    },
+
+    de: {
+      hero_subtitle: "Nadodrze – Ołbin · Wrocław",
+      hero_tagline: "Digitale touristische Infrastruktur der Stadt",
+      hero_note: "Ein Geflecht aus digitaler Geschichte, Gegenwart und Zukunft der Stadt — durch Empathie, Kunst und lebendige Viertel.",
+
+      btn_app_title: "Spaziergänge · App",
+      btn_app_sub: "Routen · Navigation · Partnerorte",
+      btn_exh_title: "Ausstellung",
+      btn_exh_sub: "physische & digitale Kunst · Wrocław",
+      btn_nft_title: "Digitale Kunst · NFT",
+      btn_nft_sub: "Archiv · Kollektionen · Support",
+      btn_ig_title: "Instagram",
+      btn_contact_title: "Kontakt",
+      btn_contact_sub: "Telegram · tutejszyvibe@gmail.com",
+
+      about_h2: "Über das Projekt",
+      about_p: "Tutéjšy Vibe ist ein autorengeführtes Stadtprojekt, das sich zu Wrocławs digitaler Tourismus-Infrastruktur entwickelt. Wir erstellen Routen, eine App, Ausstellungen und digitale Kunst, die Menschen helfen, die Stadt zu navigieren, ihre kulturellen Schichten zu verstehen und die lebendige Textur der Viertel zu spüren.",
+
+      exh_h2: "Ausstellung",
+      exh_p1: "Das Projekt ist bereits im physischen Stadtraum präsent. Die Ausstellung verbindet Fotografie, digitale Kunst und Stadtgeschichte — und zeigt, wie sich Wrocław nicht nur äußerlich, sondern auch innerlich verändert.",
+      exh_tiny: "Kuratiertes Format · lokaler Kontext · Dialog mit der Stadt",
+
+      nft_h2: "Digitale Kunst & Archiv",
+      nft_p: "NFTs sind hier keine Spekulation — sondern digitale Kunst und eine Möglichkeit, die Stadt als kulturelle Schicht festzuhalten. Kollektionen verbinden ein visuelles Archiv, Texte und eine Autor*innen-Perspektive.",
+      nft_li1: "Wrocław Archive · Season 1",
+      nft_li2: "digitale Kunst + physische Editionen",
+      nft_li3: "Projekt-Support & früher Zugang",
+      nft_tiny: "Marketplace / Mint wird in diesem Bereich ergänzt",
+
+      dev_h2: "Weiterentwicklung",
+      dev_p1: "Das Projekt skaliert organisch: neue Routen, neue Autor*innen, neue Städte. Tutéjšy Vibe bleibt im Geist autorengeführt und ist zugleich offen für Menschen, Teams und Partner.",
+      dev_tiny: "Ein langfristiger kultureller und unternehmerischer Prozess.",
+
+      contact_h2: "Kontakte"
     }
+  };
 
-    document.querySelectorAll(".lang button").forEach(btn => {
-      btn.addEventListener("click", () => setLang(btn.dataset.lang));
+  function setLang(lang){
+    const dict = i18n[lang] || i18n.ru;
+
+    // update html lang attribute
+    document.documentElement.lang = lang;
+
+    // update all nodes with data-i18n
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if(dict[key]) el.textContent = dict[key];
     });
 
-    // init
-    let saved = "ru";
-    try { saved = localStorage.getItem("tv_lang") || "ru"; } catch (e) {}
-    if (!T[saved]) saved = "ru";
-    setLang(saved);
-  </script>
+    // active button
+    document.querySelectorAll("#langSwitch button").forEach(b=>{
+      b.classList.toggle("active", b.dataset.lang === lang);
+    });
 
+    // persist
+    try{ localStorage.setItem("tv_lang", lang); }catch(e){}
+  }
+
+  // Init
+  (function init(){
+    let saved = "ru";
+    try{
+      saved = localStorage.getItem("tv_lang") || "ru";
+    }catch(e){}
+    setLang(saved);
+
+    document.getElementById("langSwitch").addEventListener("click", (e)=>{
+      const btn = e.target.closest("button[data-lang]");
+      if(!btn) return;
+      setLang(btn.dataset.lang);
+    });
+  })();
+</script>
 </body>
 </html>
